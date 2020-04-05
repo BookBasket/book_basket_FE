@@ -5,7 +5,6 @@
 	// figure out each block
 	import Book from './Book.svelte';
 
-
 	let bookB = {
 		title: 'Salt Acid Fat Heat',
 		author: 'Samin Nosrat',
