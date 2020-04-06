@@ -50,7 +50,7 @@
   }
   h1 {
     margin: 5px;
-    color: #921C2B;
+    color: #73363D;
   }
   .buttons {
     display: flex;
