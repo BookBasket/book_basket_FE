@@ -1,7 +1,7 @@
 ### This PR is a
 - [ ] feauture
 - [ ] bug fix
-- [] ] refactor
+- [ ] refactor
 ### What's this PR do?
 ### Where should the reviewer start?
 ### If applicable, how should this be manually tested?
