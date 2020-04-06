@@ -6,8 +6,6 @@
 
 <style>
   .login-page {
-    /* for the book background */
-    /* background-position: center; */
     background-size: 120%;
     background-repeat: no-repeat;
     background-color: saddlebrown;
@@ -16,7 +14,6 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    /* for the basket background */
     background-position: calc(50% - 110px) 50%;
   }
   .login-form {
@@ -39,7 +36,7 @@
     height: 50px;
     font-size: 24px;
     padding: 5px;
-    margin: 8px;
+    margin: 5px;
   }
   button {
     height: 50px;
@@ -48,10 +45,20 @@
     border-radius: 5px;
     color: white;
     font-size: 20px;
+    margin-right: 10px;
+    margin-left: 10px;
   }
   h1 {
     margin: 5px;
     color: #921C2B;
+  }
+  .buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  h2 {
+    color: #73363D;
   }
 </style>
 
@@ -59,8 +66,12 @@
   <form class='login-form'>
     <img class='logo-image' src= {logo} alt='book basket home logo' />
     <input placeholder='Username' type='text' maxlength='25'/>
-    <input placeholder='BS Password' type='password' maxlength='25'/>
-    <Link to='/user'><button>Login</button></Link>
+    <input placeholder='Password' type='password' maxlength='25'/>
+    <div class='buttons'>
+      <Link to='/user'><button>Login</button></Link>
+      <h2>or</h2>
+      <Link to='/search'><button>Search For Books</button></Link>
+    </div>
     <h1>Come Pick Out Your Next Favorite Book</h1>
   </form>
 </section>
