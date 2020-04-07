@@ -11,7 +11,7 @@
     height: 100px;
     width: 300px;
     border-bottom: 20px;
-    color: #921C2B;
+    color: #73363D;
     margin: 10px;
   }
   .library-page {

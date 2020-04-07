@@ -1,9 +1,11 @@
 
 <script>
+	import Nav from './Navigation.svelte';
+	import Book from './Book.svelte';
+
 	let userName = 'Virginia';
 
 	// figure out each block
-	import Book from './Book.svelte';
 
 	let bookB = {
 		title: 'Salt Acid Fat Heat',
@@ -49,7 +51,7 @@
 	}
 
 </style>
-
+<Nav />
 <h1>{userName}'s Library of Read Books</h1>
 <section class='library'>
 	<Book />
