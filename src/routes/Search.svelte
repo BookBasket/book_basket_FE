@@ -51,14 +51,14 @@
       <input class='search-bar' type='text' placeholder='Search...' />
     </div>
     <div class='radio-btns'>
-      <input type='radio' id='title' name='title' value='title' />
+      <input type='radio' id='title' name='books' value='title' checked/>
       <label for='title'>Title</label>
-      <input type='radio' id='author' name='author' value='author' />
+      <input type='radio' id='author' name='books' value='author' />
       <label for='author'>Author</label>
-      <input type='radio' id='genre' name='genre' value='genre' />
-      <label for='Genre'>Genre</label>
-      <input type='radio' id='isbn' name='isbn' value='isbn' />
-      <label for='Isbn'>ISBN</label>
+      <input type='radio' id='genre' name='books' value='genre' />
+      <label for='genre'>Genre</label>
+      <input type='radio' id='isbn' name='books' value='isbn' />
+      <label for='isbn'>ISBN</label>
       <button type='button'>Submit</button>
     </div>
   </form>
