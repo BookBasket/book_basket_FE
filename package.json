@@ -1,10 +1,18 @@
 {
-  "name": "svelte-app",
+  "name": "book-basket",
+  "jest": {
+    "transform": {
+      "^.+\\.svelte$": "svelte-jester"
+    },
+    "moduleFileExtensions": [
+      "js",
+      "svelte"
+    ]
+  },
   "version": "1.0.0",
   "scripts": {
-    "build": "rollup -c",
-    "dev": "rollup -c -w",
-    "start": "sirv public"
+    "test": "jest src",
+    "test:watch": "npm run test -- --watch"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^11.0.0",
@@ -15,22 +23,22 @@
     "rollup-plugin-livereload": "^1.0.0",
     "rollup-plugin-svelte": "^5.0.3",
     "rollup-plugin-terser": "^5.1.2",
-    "svelte": "^3.0.0"
+    "svelte": "^3.0.0",
+    "svelte-jester": "^1.0.5"
   },
   "dependencies": {
     "sirv-cli": "^0.4.4",
     "svelte-routing": "^1.4.2",
     "svelte-spa-router": "^2.1.0"
   },
-  "scripts": {
-    "test": "jest src",
-    "test:watch": "npm run test -- --watch"
+  "setupFilesAfterEnv": [
+    "@testing-library/jest-dom/extend-expect"
+  ],
+  "transform": {
+    "^.+\\.svelte$": "svelte-jester"
   },
-  "jest": {
-    "transform": {
-      "^.+\\.svelte$": "svelte-jester"
-    },
-    "moduleFileExtensions": ["js", "svelte"]
-  },
-  "setupFilesAfterEnv": ["@testing-library/jest-dom/extend-expect"]
+  "moduleFileExtensions": [
+    "js",
+    "svelte"
+  ]
 }
