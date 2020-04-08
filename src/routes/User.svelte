@@ -1,5 +1,6 @@
 <script>
   import { Link } from 'svelte-routing';
+
   import Nav from './Navigation.svelte';
 
   let bgImage = 'assets/basket-bg.jpg';
