@@ -1,9 +1,9 @@
-<script>
+<script context='module'>
   import { Link } from 'svelte-routing';
   import Nav from './Navigation.svelte';
 
-  let bgImage = 'assets/basket-bg.jpg';
-  let logo = 'assets/BB-Logo-White.png';
+  let bgImage = './assets/basket-bg.jpg';
+  let logo = './assets/BB-Logo-White.png';
 </script>
 
 <style>

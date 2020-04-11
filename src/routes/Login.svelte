@@ -1,7 +1,7 @@
-<script>
+<script context='module'>
   import { Link } from 'svelte-routing';
-  let bgImage = 'assets/basket-bg.jpg';
-  let logo = 'assets/BB-Logo-White.png';
+  let bgImage = './assets/basket-bg.jpg';
+  let logo = './assets/BB-Logo-White.png';
 </script>
 
 <style>
