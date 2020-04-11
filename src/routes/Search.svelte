@@ -3,9 +3,13 @@
   import Nav from './Navigation.svelte';
 
   let books = [];
+  let radioInput;
+  let userInput;
 
   function getBooks() {
-    fetch('https://book-basket-be.herokuapp.com/search?type=inauthor:&q=jk rowling')
+    userInput = document.getElementById('user-input').value;
+    console.log(radioInput, userInput)
+    fetch(`https://book-basket-be.herokuapp.com/search?type=${radioInput}&q=${userInput}`)
       .then(response => response.json())
       .then(response => exportBooks(response))
       .catch(error => console.log(error))
@@ -15,6 +19,15 @@
     books = bookImports.data
     books = books
     console.log(books)
+  }
+
+  function updateBtn() {
+    let ele = document.getElementsByName('books');
+    for (var i = 0; i < ele.length; i++) {
+      if(ele[i].checked) {
+        radioInput = ele[i].value
+      }
+    }
   }
 
 
@@ -60,9 +73,27 @@
     padding: 5px;
   }
   .bookshelf {
-    height: 500px;
-    width: 1000px;
-    background-color: rebeccapurple;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    padding: 20px;
+  }
+  .each-book {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    margin: 10px;
+    align-items: center;
+  }
+  .book-pic {
+    height: 200px;
+    width: 120px;
+    object-fit: cover;
+    box-shadow: 10px 0px 10px 0px rgba(0,0,0,0.5);
+  }
+  .book-title {
+    font-size: 18px;
+    text-align: center;
   }
 </style>
 
@@ -70,23 +101,26 @@
   <Nav />
   <form>
     <div>
-      <input class='search-bar' type='text' placeholder='Search...' />
+      <input class='search-bar' id='user-input' type='text' placeholder='Search...' />
     </div>
-    <div class='radio-btns'>
-      <input type='radio' id='title' name='books' value='title' checked/>
+    <div class='radio-btns' id='radio-btns'>
+      <input type='radio' id='title' name='books' value='title' on:click={updateBtn} checked='true' />
       <label for='title'>Title</label>
-      <input type='radio' id=':author' name='books' value='author' />
+      <input type='radio' id=':author' name='books' value='author' on:click={updateBtn} checked='false' />
       <label for='author'>Author</label>
-      <input type='radio' id='genre' name='books' value='genre' />
+      <input type='radio' id='genre' name='books' value='genre' on:click={updateBtn} checked='false' />
       <label for='genre'>Genre</label>
-      <input type='radio' id='isbn' name='books' value='isbn' />
+      <input type='radio' id='isbn' name='books' value='isbn' on:click={updateBtn} checked='false' />
       <label for='isbn'>ISBN</label>
       <button type='button' on:click={getBooks}>Submit</button>
     </div>
   </form>
   <section class='bookshelf'>
     {#each books as book }
-      <p>{book.attributes.title}</p>
+      <div class='each-book'>
+        <img class='book-pic' src='{book.attributes.image_url}' />
+        <p class='book-title'>{book.attributes.title}</p>
+      </div>
     {:else}
       <p>No Books to Display...</p>
     {/each}
