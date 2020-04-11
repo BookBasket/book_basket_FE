@@ -112,8 +112,9 @@
     margin-left: 60px;
     visibility: hidden;
   }
-  .each-book:hover {
+  .each-book:hover .plus-icon {
     visibility: visible;
+    display: absolute;
   }
   .warning {
     display: none;
