@@ -1,5 +1,22 @@
 <script>
+  import { afterUpdate, onMount } from 'svelte';
   import Nav from './Navigation.svelte';
+
+  let books = [];
+
+  function getBooks() {
+    fetch('https://book-basket-be.herokuapp.com/search?type=inauthor:&q=jk rowling')
+      .then(response => response.json())
+      .then(response => exportBooks(response))
+      .catch(error => console.log(error))
+  }
+
+  function exportBooks(bookImports) {
+    books = bookImports.data
+    books = books
+    console.log(books)
+  }
+
 
 </script>
 
@@ -42,6 +59,11 @@
     margin: 10px;
     padding: 5px;
   }
+  .bookshelf {
+    height: 500px;
+    width: 1000px;
+    background-color: rebeccapurple;
+  }
 </style>
 
 <section>
@@ -53,13 +75,20 @@
     <div class='radio-btns'>
       <input type='radio' id='title' name='books' value='title' checked/>
       <label for='title'>Title</label>
-      <input type='radio' id='author' name='books' value='author' />
+      <input type='radio' id=':author' name='books' value='author' />
       <label for='author'>Author</label>
       <input type='radio' id='genre' name='books' value='genre' />
       <label for='genre'>Genre</label>
       <input type='radio' id='isbn' name='books' value='isbn' />
       <label for='isbn'>ISBN</label>
-      <button type='button'>Submit</button>
+      <button type='button' on:click={getBooks}>Submit</button>
     </div>
   </form>
+  <section class='bookshelf'>
+    {#each books as book }
+      <p>{book.attributes.title}</p>
+    {:else}
+      <p>No Books to Display...</p>
+    {/each}
+  </section>
 </section>
