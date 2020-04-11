@@ -2,17 +2,24 @@
   import { afterUpdate, onMount } from 'svelte';
   import Nav from './Navigation.svelte';
 
+  let src = './assets/plus.svg';
+
   let books = [];
-  let radioInput;
+  let radioInput = null;
   let userInput;
 
   function getBooks() {
     userInput = document.getElementById('user-input').value;
-    console.log(radioInput, userInput)
-    fetch(`https://book-basket-be.herokuapp.com/search?type=${radioInput}&q=${userInput}`)
-      .then(response => response.json())
-      .then(response => exportBooks(response))
-      .catch(error => console.log(error))
+    if (radioInput === null ) {
+      let textWarning = document.getElementById('warning')
+      textWarning.classList.remove('warning')
+    } else {
+      console.log(radioInput, userInput)
+      fetch(`https://book-basket-be.herokuapp.com/search?type=${radioInput}&q=${userInput}`)
+        .then(response => response.json())
+        .then(response => exportBooks(response))
+        .catch(error => console.log(error))
+    }
   }
 
   function exportBooks(bookImports) {
@@ -30,7 +37,10 @@
     }
   }
 
-
+  function updateWarning() {
+    let textWarning = document.getElementById('warning')
+    textWarning.classList.add('warning')
+  }
 </script>
 
 <style>
@@ -95,13 +105,33 @@
     font-size: 18px;
     text-align: center;
   }
+  .plus-icon {
+    position: absolute;
+    height: 30px;
+    margin-top: 15px;
+    margin-left: 60px;
+    visibility: hidden;
+  }
+  .each-book:hover {
+    visibility: visible;
+  }
+  .warning {
+    display: none;
+  }
+  #warning {
+    position: absolute;
+    margin-left: 620px;
+    margin-top: -40px;
+    font-size: 18px;
+  }
 </style>
 
 <section>
   <Nav />
   <form>
     <div>
-      <input class='search-bar' id='user-input' type='text' placeholder='Search...' />
+      <input on:click={updateWarning} class='search-bar' id='user-input' type='text' placeholder='Search...' />
+      <h4 id='warning' class='warning'>Search Criteria Required</h4>
     </div>
     <div class='radio-btns' id='radio-btns'>
       <input type='radio' id='title' name='books' value='title' on:click={updateBtn} checked='true' />
@@ -118,6 +148,7 @@
   <section class='bookshelf'>
     {#each books as book }
       <div class='each-book'>
+        <img class='plus-icon' {src} alt='add to library plus button' />
         <img class='book-pic' src='{book.attributes.image_url}' />
         <p class='book-title'>{book.attributes.title}</p>
       </div>
