@@ -1,57 +1,16 @@
 <script>
   import { Link, Route, Router } from 'svelte-routing';
   import Nav from './Navigation.svelte';
-  import SingleBook from './SingleBook.svelte';
 
   let src = './assets/plus.svg';
-
-  let books = [];
-  let radioInput = null;
-  let userInput;
   let singleBook;
-  export let book;
 
-  function getBooks() {
-    userInput = document.getElementById('user-input').value;
-    if (radioInput === null ) {
-      let textWarning = document.getElementById('warning')
-      textWarning.classList.remove('hidden')
-    } else {
-      console.log(radioInput, userInput)
-      fetch(`https://book-basket-be-staging.herokuapp.com/search?type=${radioInput}&q=${userInput}`)
-        .then(response => response.json())
-        .then(response => exportBooks(response))
-        .catch(error => console.log(error))
-    }
-  }
+  export let books;
+  export let getBooks;
+  export let updateBtn;
+  export let updateWarning;
+  export let setCurrentBook;
 
-  function exportBooks(bookImports) {
-    books = bookImports.data
-    books = books
-    console.log(books)
-  }
-
-  function updateBtn() {
-    let ele = document.getElementsByName('books');
-    for (var i = 0; i < ele.length; i++) {
-      if(ele[i].checked) {
-        radioInput = ele[i].value
-      }
-    }
-  }
-
-  function updateWarning() {
-    let textWarning = document.getElementById('warning')
-    textWarning.classList.add('hidden')
-  }
-
-  function setBook(chosenBook) {
-    singleBook = chosenBook;
-    book = chosenBook;
-    console.log(book)
-    let oneBook = document.getElementById('single-book');
-    oneBook.classList.remove('hidden');
-  }
 </script>
 
 <style>
@@ -143,38 +102,66 @@
   <Nav />
   <form>
     <div>
-      <input on:click={updateWarning} class='search-bar' id='user-input' type='text' placeholder='Search...' />
+      <input
+        on:click={updateWarning}
+        class='search-bar'
+        id='user-input'
+        type='text'
+        placeholder='Search...'
+      />
       <h4 id='warning' class='hidden'>Search Criteria Required</h4>
     </div>
     <div class='radio-btns' id='radio-btns'>
-      <input type='radio' id='title' name='books' value='title' on:click={updateBtn} checked='true' />
+      <input
+        type='radio'
+        id='title'
+        name='books'
+        value='title'
+        on:click={updateBtn}
+        checked='true'
+      />
       <label for='title'>Title</label>
-      <input type='radio' id=':author' name='books' value='author' on:click={updateBtn} checked='false' />
+      <input
+        type='radio'
+        id=':author'
+        name='books'
+        value='author'
+        on:click={updateBtn}
+        checked='false'
+      />
       <label for='author'>Author</label>
-      <input type='radio' id='genre' name='books' value='genre' on:click={updateBtn} checked='false' />
+      <input
+        type='radio'
+        id='genre'
+        name='books'
+        value='genre'
+        on:click={updateBtn}
+        checked='false'
+      />
       <label for='genre'>Genre</label>
-      <input type='radio' id='isbn' name='books' value='isbn' on:click={updateBtn} checked='false' />
+      <input
+        type='radio'
+        id='isbn'
+        name='books'
+        value='isbn'
+        on:click={updateBtn}
+        checked='false'
+      />
       <label for='isbn'>ISBN</label>
       <button type='button' on:click={getBooks}>Submit</button>
     </div>
   </form>
-  <section id='bookshelf'>
-    {#each books as book }
-        <Link to='/book/{book.attributes.isbn}'>
-          <div class='each-book' on:click|preventDefault={setBook(book)}>
-            <img class='plus-icon' {src} alt='add to library plus button' />
-            <img class='book-pic' src='{book.attributes.image_url}' />
-            <p class='book-title'>{book.attributes.title}</p>
-          </div>
-        </Link>
+  <section class='bookshelf'>
+    {#each books as book, i}
+       <Link to='/book/{i}' on:click={() =>  setCurrentBook(i)} >
+        <div class='each-book'>
+          <img class='plus-icon' {src} alt='add to library plus button' />
+          <img class='book-pic' src={book.attributes.image_url} />
+          <p class='book-title'>{book.attributes.title}</p>
+        </div>
+      </Link>
     {:else}
-      <p>No Books to Display</p>
+    <p>Search for Books</p>
     {/each}
   </section>
-  <section id='single-book' class='hidden'>
-  <!-- {#if singleBook}
-    <SingleBook book={singleBook} />
-  {/if} -->
-  </section>
-
 </section>

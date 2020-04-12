@@ -1,13 +1,14 @@
 <script>
+	import { beforeUpdate, afterUpdate } from 'svelte';
 
-	let book = {
-		title: 'The Great Gatsby',
-		author: 'F. Scott Fitzgerald',
-		genre: 'Tragedy',
-		published: 'April 10, 1926',
-		rating: '4.0',
-		review: 'The Great Gatsby is one of the great classics of twentieth-century literature.'
-	}
+	export let chosenBook;
+
+	afterUpdate(() => {
+		if (chosenBook !== {}) {
+			chosenBook = chosenBook
+			console.log(chosenBook)
+		}
+	});
 
 </script>
 
@@ -35,7 +36,4 @@
 </style>
 
 <div class='single-book'>
-	<h2>{book.title}</h2>
-	<h3>{book.author}</h3>
-	<p>{book.review}</p>
 </div>
