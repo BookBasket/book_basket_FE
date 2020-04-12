@@ -4,8 +4,8 @@ import Library from './routes/Library.svelte';
 import User from './routes/User.svelte';
 import Login from './routes/Login.svelte';
 import Search from './routes/Search.svelte';
-let bgImage = 'assets/basket-bg.jpg';
-let logo = 'assets/BB-Logo-White.png';
+let bgImage = './assets/basket-bg.jpg';
+let logo = './assets/BB-Logo-White.png';
 export let url='';
 </script>
 
