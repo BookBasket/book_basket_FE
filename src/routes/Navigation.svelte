@@ -47,8 +47,6 @@
   <Link to='/'><img class='logo' { src } alt='book basket logo' /></Link>
   <Link to='/'><img class='title' src={ text } alt='book basket logo' /></Link>
   <p class='welcome'>Welcome user.name</p>
-  <!-- <Link to='/user'><img class='avatar' src={ avatar } alt='book basket logo' /></Link> -->
-  <!-- need to add an account page? for the avatar icon -->
   <Link to='/search'><img class='search' src={ search } alt='book basket logo' /></Link>
   <Link to='/user'><img class='library' src={ library } alt='book basket logo' /></Link>
 </nav>
