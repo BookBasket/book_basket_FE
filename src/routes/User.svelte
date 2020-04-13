@@ -14,6 +14,7 @@
     border-bottom: 20px;
     color: #73363D;
     margin: 10px;
+    font-size: 20px;
   }
   .library-page {
     background-size: 120%;
@@ -22,6 +23,10 @@
     height: 100vh;
     background-position: calc(50% - 110px) 50%;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
   .blur {
     background-color:  rgba(230,214,197,0.5);
@@ -38,8 +43,8 @@
 <section class='library-page' style="background-image: url('{bgImage}')">
   <Nav />
   <div class='blur'>
-    <Link to='/library'><button>Already Read Books</button></Link>
-    <Link to='/library'><button>Want to Read Books</button></Link>
+    <Link to='/library-future'><button>Already Read Books</button></Link>
+    <Link to='/library-past'><button>Want to Read Books</button></Link>
     <Link to='/search'><button>Search For New Book</button></Link>
   </div>
 </section>

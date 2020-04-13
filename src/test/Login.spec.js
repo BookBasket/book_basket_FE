@@ -1,12 +1,15 @@
-// import '@testing-library/jest-dom/extend-expect';
-// import Login from '../routes/Login';
+import { render } from "@testing-library/svelte";
+import Login from "../routes/Login.svelte";
 
-test('tests', () => {
-  // const { getByText } = render(Login)
-  // expect().toBeInTheDocument()
-})
+describe("Login component", () => {
+  test("should render component correctly", () => {
+    // const { container } = render(Login, {
+    //   props: {
+    //     articles: []
+    //   }
+    // });
 
-test('tests 2', () => {
-  // const { getByText } = render(Login)
-  // expect().toBeInTheDocument()
-})
+  // expect(container).toContainHTML("<div></div>");
+  });
+
+});
