@@ -7,5 +7,7 @@ deploy:
   provider: heroku
   api_key:
     secure: Cl82Ox5Hk1+EYJDI262PXsPqHTiZZBZYhwN+QVNAD189S3LFnsT0TaPpfHVRe1mUehqk2laC59vU33qbDhO6WeZz3xDlvHrjUWnibw9xpdpXD9hgOSQr/SWNVrsA9BegEx8DT6FqatkgFtiUQ1aIHoSc+nOuYkHfuow5eIzDLg9coe2MsRmYGUH14ENAxtYh+pqrukqau+uc7OQQth7oMtXQ7HIiuLcNnx34dEn7QegypWrVlyKvopM1HyiELhGS0jGeRPRav63Ak7Pil79t+rhytRQ3qXTjvRN0G50rfAyb5HKN0hllrZMcBJMhF68F25k4jUrfxW5HOq6Oq5IwGRcA/eGaKEdrLDw3cyNTxiE+5yEGBSHaW93KK/8cr0lqBwwvMDAw63nFymgRpLSoljXmBJ97IGyWrVMWq//2Guj3KnULjvmSfnwGWOuMg+/eCStwTwiYkikeGRdceRb6UsXq+GUc1uUeNNmWGy8XFe48mP6wZ4K9vrwmOdGPtlhEWM0miXlO0+Zi4YrXyX3/lRtWC/NSvJKyJYYEFYEi1F+trI0g9CAyxgrVnDRH5HtNUhrxlvNTpOmQlAyvyp2BPUlQAihHma5kHs4A+gOEY7ZKA/e/FniQL4sf+qRsHLFaOw52qT7bWMAt47OMW6hBBt8oeOEx9CNWs0IQBzgl4XA=
-    app: book-basket-fe
+    app:
+      master: book-basket-staging
+      production: book-basket-fe
     skip_cleanup: true
