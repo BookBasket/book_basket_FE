@@ -1,11 +1,11 @@
 <script context='module'>
   import { Link } from 'svelte-routing';
 
-  let src = './assets/White-BB-Logo.png';
-  let text = './assets/BB-Logo-Words.png';
-  let avatar = './assets/user.svg';
-  let search = './assets/search.svg';
-  let library = './assets/bookshelf.svg';
+  let src = '../assets/White-BB-Logo.png';
+  let text = '../assets/BB-Logo-Words.png';
+  let avatar = '../assets/user.svg';
+  let search = '../assets/search.svg';
+  let library = '../assets/bookshelf.svg';
 
 </script>
 

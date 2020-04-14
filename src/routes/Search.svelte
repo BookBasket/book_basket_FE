@@ -1,5 +1,5 @@
 <script>
-  import { Link, Route, Router } from 'svelte-routing';
+  import { Link } from 'svelte-routing';
   import Nav from './Navigation.svelte';
 
   let src = './assets/plus.svg';
@@ -10,6 +10,7 @@
   export let updateBtn;
   export let updateWarning;
   export let setCurrentBook;
+  export let addToLibrary;
 
 </script>
 
@@ -153,13 +154,13 @@
   </form>
   <section id='bookshelf'>
     {#each books as book, i}
-       <Link to='/book/{i}' on:click={() =>  setCurrentBook(i)} >
         <div class='each-book'>
-          <img class='plus-icon' {src} alt='add to library plus button' />
-          <img class='book-pic' src={book.attributes.image_url} />
-          <p class='book-title'>{book.attributes.title}</p>
+          <img class='plus-icon' {src} alt='add to library plus button' on:click={() => addToLibrary(i)}/>
+          <Link to='/book/{i}' on:click={() =>  setCurrentBook(i)} >
+            <img class='book-pic' src={book.attributes.image_url} />
+            <p class='book-title'>{book.attributes.title}</p>
+          </Link>
         </div>
-      </Link>
     {:else}
     <p>No Books to Display</p>
     {/each}

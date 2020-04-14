@@ -1,7 +1,7 @@
 <script>
-	import { Link, Route, Router } from 'svelte-routing';
+	import { afterUpdate } from 'svelte';
 	import Nav from './Navigation.svelte';
-	import { beforeUpdate, afterUpdate } from 'svelte';
+	import { afterUpdate } from 'svelte';
 
 	export let chosenBook;
 	let authorNames = '';
@@ -12,7 +12,37 @@
 			// findAuthors()
 			console.log(chosenBook)
 		}
-	});
+	})
+
+	function changeMonth() {
+	let month;
+	const formatDate = chosenBook.attributes.published_date.split('-')
+	for(var i = 0; i < 13; i++) {
+		let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+		if (formatDate[1] === '10') {
+			month = 'October'
+		} else if (formatDate[1].includes(0)) {
+			if(`0${i}` === formatDate[1]) {
+				month = months[i - 1]
+			}
+		} else {
+			if (`${i}` === formatDate[1]) {
+				month = months[i - 1]
+				}
+			}
+		}
+	}
+
+	function findAuthors() {
+		// let length = null
+		console.log(length)
+		chosenBook.attributes.authors.data.forEach(author => {
+			console.log(author.attributes.name)
+			authorNames += ` ${author.attributes.name} &`
+		})
+		// authorNames = authorNames.splice(length)
+		console.log(authorNames)
+	}
 
 	function findAuthors() {
 		chosenBooks.attributes.authors.data.forEach(author => {
@@ -26,19 +56,6 @@
 </script>
 
 <style>
-
-	/* .single-book {
-		width: 200px;
-		height: 350px;
-		background-color: cornflowerblue;
-		padding: 10px;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		margin: 20px;
-		border: solid 5px navy;
-		border-radius: 15px;
-	} */
 	h1 {
     color: #73363D;
   }
@@ -110,7 +127,7 @@
 		<img src={chosenBook.attributes.image_url} class='single-book-image'>
 			<div class='book-info'>
 				<h1 class='book-title'>{chosenBook.attributes.title}</h1>
-				<p class='book-isbn'>Author: {authorNames} </p>
+				<p class='book-isbn'>Author: {authorNames}</p>
 				<p class='book-isbn'>Date Published: {chosenBook.attributes.published_date}</p>
 				<p class='book-isbn'>ISBN: {chosenBook.attributes.isbn}</p>
 			</div>
@@ -122,6 +139,7 @@
 			</div>
 		</div>
 		<div class='book-description'>
+		<h1>Description:</h1>
 			<h2 class='book-description-title'>Description</h2>
 			<p class='description'>{chosenBook.attributes.description}</p>
 		</div>
