@@ -41,15 +41,18 @@
     margin-left: 10px;
 	}
 	button {
-    height: 50px;
-    width: 200px;
+    height: 60px;
+    width: 300px;
     background-color: #73363D;
     border-radius: 5px;
     color: white;
     font-size: 20px;
-    margin-right: 10px;
-    margin-left: 10px;
+		margin: 20px;
   }
+	button:hover {
+		color:#73363D;
+		background-color: rgba(230,214,197,0.95);
+	}
 	.book-buttons {
     display: flex;
     flex-direction: column;
