@@ -68,11 +68,12 @@
       },
       body: JSON.stringify(usersAddedBook)
     }
-    fetch(`https://book-basket-be-staging.herokuapp.com/create_book?shelf_id=2&title=Cloud Atlas&summary=Testing&image_url=https://images-na.ssl-images-amazon.com/images/I/91RPigWberL.jpg&isbn=1234567&published_date=May 4 2001&author=David Mitchell&author=J K Rowling&genre=fiction&genre=fantasy`, header)
-      .then(response => {
-        console.log(response)
-        usersWantToReadBooks.push(usersAddedBook);
-      });
+    // fetch(`https://book-basket-be-staging.herokuapp.com/create_book?shelf_id=2&title=Cloud Atlas&summary=Testing&image_url=https://images-na.ssl-images-amazon.com/images/I/91RPigWberL.jpg&isbn=1234567&published_date=May 4 2001&author=David Mitchell&author=J K Rowling&genre=fiction&genre=fantasy`, header)
+    //   .then(response => {
+    //     console.log(response)
+    //     usersWantToReadBooks.push(usersAddedBook);
+    //   });
+    usersWantToReadBooks.push(usersAddedBook);
   }
 
 </script>
@@ -81,8 +82,17 @@
   <div>
     <Route path='/' component='{Login}' />
     <Route path='/user' component='{User}' />
-    <Route path='/library-future' component='{Library}' />
-    <Route path='/library-past' component='{Library}' />
+    <Route
+      path='/library-future'
+      component='{Library}'
+      setCurrentBook='{setCurrentBook}'
+    />
+    <Route
+      path='/library-past'
+      component='{Library}'
+      usersWantToReadBooks='{usersWantToReadBooks}'
+      setCurrentBook='{setCurrentBook}'
+    />
     <Route
       path='/search'
       component='{Search}'
