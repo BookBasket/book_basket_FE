@@ -81,7 +81,6 @@
 		height: 300px;
 		font-size: 18px;
 		line-height: 22px;
-		padding: 15px;
 		margin: 15px;
 		margin-left: 100px;
 		margin-right: 100px;
@@ -96,6 +95,10 @@
 	.book-title {
 		width: 600px;
 		font-size: 28px;
+	}
+	.book-description-title {
+		margin-left: 100px;
+		font-size: 22px;
 	}
 
 </style>
@@ -119,6 +122,7 @@
 			</div>
 		</div>
 		<div class='book-description'>
+			<h2 class='book-description-title'>Description</h2>
 			<p class='description'>{chosenBook.attributes.description}</p>
 		</div>
 	</section>
