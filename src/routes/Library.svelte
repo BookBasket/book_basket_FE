@@ -69,6 +69,7 @@
   .book-title {
     font-size: 18px;
     text-align: center;
+		color: black;
   }
 
 </style>
