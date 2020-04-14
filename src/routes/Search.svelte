@@ -1,5 +1,5 @@
 <script>
-  import { Link, Route, Router } from 'svelte-routing';
+  import { Link } from 'svelte-routing';
   import Nav from './Navigation.svelte';
 
   let src = './assets/plus.svg';
