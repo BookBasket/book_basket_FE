@@ -3,8 +3,6 @@
 	import Nav from './Navigation.svelte';
 	import { beforeUpdate, afterUpdate } from 'svelte';
 
-	let src = './assets/search.svg';
-
 	export let chosenBook;
 
 	afterUpdate(() => {
@@ -30,9 +28,11 @@
 		border: solid 5px navy;
 		border-radius: 15px;
 	} */
-
+	h1 {
+    color: #73363D;
+  }
 	.book-info {
-		color: black;
+		color: #73363D;
 		font-family: sans-serif;
 		font-size: 1.5em;
 		display: flex;
@@ -67,7 +67,7 @@
 		width: 1850px;
 		height: 300px;
 		font-size: 20px;
-		line-height: 20px:
+		line-height: 20px;
 		padding: 15px;
 		margin: 15px;
 	}
@@ -80,7 +80,7 @@
 </style>
 
 <section>
-<Nav />
+	<Nav />
 	<section class='single-book'>
 		<div class='book-info-buttons'>
 		<img src={chosenBook.attributes.image_url} class='single-book-image'>
