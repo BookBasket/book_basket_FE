@@ -1,5 +1,5 @@
 <script>
-	import { beforeUpdate, afterUpdate } from 'svelte';
+	import { afterUpdate } from 'svelte';
 
 	export let chosenBook;
 
