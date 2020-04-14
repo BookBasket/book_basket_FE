@@ -78,6 +78,7 @@
 		width: 200px;
 		height: 350px;
 		margin: 20px;
+		object-fit: cover;
 	}
 
 </style>
