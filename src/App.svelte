@@ -16,6 +16,8 @@
   let radioInput = null;
   let userInput;
   let bookNum;
+  let usersReadBooks = [];
+  let usersWantToReadBooks = [];
 
   function getBooks() {
     userInput = document.getElementById('user-input').value;
@@ -55,6 +57,24 @@
     bookNum = bookNumInput
   }
 
+  function addToLibrary(bookNumInput) {
+    bookNum = bookNumInput
+    let usersAddedBook = books[bookNum].attributes
+    console.log(usersAddedBook);
+    let header = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(usersAddedBook)
+    }
+    fetch(`https://book-basket-be-staging.herokuapp.com/create_book?shelf_id=2&title=Cloud Atlas&summary=Testing&image_url=https://images-na.ssl-images-amazon.com/images/I/91RPigWberL.jpg&isbn=1234567&published_date=May 4 2001&author=David Mitchell&author=J K Rowling&genre=fiction&genre=fantasy`, header)
+      .then(response => {
+        console.log(response)
+        usersWantToReadBooks.push(usersAddedBook);
+      });
+  }
+
 </script>
 
 <Router url='{url}'>
@@ -71,12 +91,13 @@
       updateBtn='{updateBtn}'
       updateWarning='{updateWarning}'
       setCurrentBook='{setCurrentBook}'
+      addToLibrary='{addToLibrary}'
     />
     <Route
       path='/book/:id'
       component='{Book}'
       chosenBook='{books[bookNum]}'
     />
-    <Route component='{NotFound}' />
+    <Route component='{Login}' />
   </div>
 </Router>
