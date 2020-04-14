@@ -1,6 +1,7 @@
 <script>
 	import { afterUpdate } from 'svelte';
 	import Nav from './Navigation.svelte';
+	import { afterUpdate } from 'svelte';
 
 	export let chosenBook;
 	let authorNames = '';
@@ -8,7 +9,7 @@
 	afterUpdate(() => {
 		if (chosenBook !== {}) {
 			chosenBook = chosenBook
-			findAuthors()
+			// findAuthors()
 			console.log(chosenBook)
 		}
 	})
@@ -43,6 +44,15 @@
 		console.log(authorNames)
 	}
 
+	function findAuthors() {
+		chosenBooks.attributes.authors.data.forEach(author => {
+			console.log(author.attributes.name)
+			authorNames += `${author.attributes.name}`
+		})
+		console.log(authorNames)
+	}
+
+
 </script>
 
 <style>
@@ -65,20 +75,18 @@
     border-radius: 5px;
     color: white;
     font-size: 20px;
-    margin-right: 10px;
-    margin-left: 10px;
-		margin: 10px;
+		margin: 20px;
   }
 	button:hover {
-		color: #73363D;
-		background-color: rgba(230,214,197,1);
+		color:#73363D;
+		background-color: rgba(230,214,197,0.95);
 	}
 	.book-buttons {
     display: flex;
     flex-direction: column;
     align-items: right;
 		margin-top: 30px;
-		margin-right: 100px;
+		margin-right: 10px;
     margin-left: auto;
   }
 	.book-info-buttons {
@@ -89,11 +97,9 @@
 	.description {
 		height: 300px;
 		font-size: 18px;
-		line-height: 20px;
-		padding: 15px;
+		line-height: 22px;
 		margin: 15px;
 		margin-left: 100px;
-		line-height: 22px;
 		margin-right: 100px;
 	}
 	.single-book-image {
@@ -106,6 +112,10 @@
 	.book-title {
 		width: 600px;
 		font-size: 28px;
+	}
+	.book-description-title {
+		margin-left: 100px;
+		font-size: 22px;
 	}
 
 </style>
@@ -130,6 +140,7 @@
 		</div>
 		<div class='book-description'>
 		<h1>Description:</h1>
+			<h2 class='book-description-title'>Description</h2>
 			<p class='description'>{chosenBook.attributes.description}</p>
 		</div>
 	</section>
