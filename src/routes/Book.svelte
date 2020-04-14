@@ -1,22 +1,26 @@
 <script>
 	import { afterUpdate } from 'svelte';
 	import Nav from './Navigation.svelte';
-	import { afterUpdate } from 'svelte';
 
 	export let chosenBook;
 	let authorNames = '';
+	let month = '';
+	let formatDate = [];
 
 	afterUpdate(() => {
+		changeMonth()
 		if (chosenBook !== {}) {
 			chosenBook = chosenBook
-			// findAuthors()
+			findAuthors()
 			console.log(chosenBook)
 		}
 	})
 
 	function changeMonth() {
-	let month;
-	const formatDate = chosenBook.attributes.published_date.split('-')
+	if (!chosenBook.attributes.published_date.includes('-')) {
+		return;
+	}
+	formatDate = chosenBook.attributes.published_date.split('-');
 	for(var i = 0; i < 13; i++) {
 		let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 		if (formatDate[1] === '10') {
@@ -31,27 +35,22 @@
 				}
 			}
 		}
+		console.log(month, formatDate)
 	}
 
 	function findAuthors() {
-		// let length = null
-		console.log(length)
-		chosenBook.attributes.authors.data.forEach(author => {
-			console.log(author.attributes.name)
-			authorNames += ` ${author.attributes.name} &`
-		})
-		// authorNames = authorNames.splice(length)
-		console.log(authorNames)
+		let newString = '';
+		if(chosenBook.attributes.authors.data.length === 1) {
+			authorNames = chosenBook.attributes.authors.data[0].attributes.name
+			return authorNames
+		} else {
+			chosenBook.attributes.authors.data.forEach(author => {
+				newString += ` ${author.attributes.name} &`
+			})
+			authorNames = newString.slice(0, -1);
+			return authorNames;
+		}
 	}
-
-	function findAuthors() {
-		chosenBooks.attributes.authors.data.forEach(author => {
-			console.log(author.attributes.name)
-			authorNames += `${author.attributes.name}`
-		})
-		console.log(authorNames)
-	}
-
 
 </script>
 
@@ -128,8 +127,12 @@
 			<div class='book-info'>
 				<h1 class='book-title'>{chosenBook.attributes.title}</h1>
 				<p class='book-isbn'>Author: {authorNames}</p>
-				<p class='book-isbn'>Date Published: {chosenBook.attributes.published_date}</p>
-				<p class='book-isbn'>ISBN: {chosenBook.attributes.isbn}</p>
+				{#if !chosenBook.attributes.published_date.includes('-') }
+					<p class='book-isbn'>Date Published: {chosenBook.attributes.published_date}</p>
+				{:else}
+					<p class='book-isbn'>Date Published: {month} {formatDate[2]}, {formatDate[0]}</p>
+					<p class='book-isbn'>ISBN: {chosenBook.attributes.isbn}</p>
+				{/if}
 			</div>
 
 			<div class='book-buttons'>
@@ -139,9 +142,12 @@
 			</div>
 		</div>
 		<div class='book-description'>
-		<h1>Description:</h1>
-			<h2 class='book-description-title'>Description</h2>
-			<p class='description'>{chosenBook.attributes.description}</p>
+			{#if chosenBook.attributes.description === ""}
+				<h2 class='book-description-title'>No Description Provided</h2>
+			{:else}
+				<h2 class='book-description-title'>Description</h2>
+				<p class='description'>{chosenBook.attributes.description}</p>
+			{/if}
 		</div>
 	</section>
 </section>
