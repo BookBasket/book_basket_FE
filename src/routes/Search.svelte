@@ -151,7 +151,7 @@
       <button type='button' on:click={getBooks}>Submit</button>
     </div>
   </form>
-  <section class='bookshelf'>
+  <section id='bookshelf'>
     {#each books as book, i}
        <Link to='/book/{i}' on:click={() =>  setCurrentBook(i)} >
         <div class='each-book'>
@@ -161,7 +161,7 @@
         </div>
       </Link>
     {:else}
-    <p>Search for Books</p>
+    <p>No Books to Display</p>
     {/each}
   </section>
 </section>

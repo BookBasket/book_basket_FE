@@ -4,16 +4,17 @@
   import User from './routes/User.svelte';
   import Login from './routes/Login.svelte';
   import Search from './routes/Search.svelte';
-  import BadPath from './routes/BadPath.svelte';
+  import NotFound from './routes/BadPath.svelte';
   import Book from './routes/Book.svelte';
+
+  export let url='';
+
   let bgImage = './assets/basket-bg.jpg';
   let logo = './assets/BB-Logo-White.png';
-  export let url='';
   let book = {};
   let books = [];
   let radioInput = null;
   let userInput;
-  // let chosenBook = {};
   let bookNum;
 
   function getBooks() {
@@ -51,7 +52,6 @@
   }
 
   function setCurrentBook(bookNumInput) {
-    // let chosenBook = books[bookNumInput]
     bookNum = bookNumInput
   }
 
@@ -61,7 +61,8 @@
   <div>
     <Route path='/' component='{Login}' />
     <Route path='/user' component='{User}' />
-    <Route path='/library' component='{Library}' />
+    <Route path='/library-future' component='{Library}' />
+    <Route path='/library-past' component='{Library}' />
     <Route
       path='/search'
       component='{Search}'
@@ -76,6 +77,6 @@
       component='{Book}'
       chosenBook='{books[bookNum]}'
     />
-    <Route component='{BadPath}' />
+    <Route component='{NotFound}' />
   </div>
 </Router>

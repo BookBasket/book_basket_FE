@@ -2,6 +2,28 @@
   import { Link } from 'svelte-routing';
   let bgImage = './assets/basket-bg.jpg';
   let logo = './assets/BB-Logo-White.png';
+
+  let userName = null;
+  let userPassword = null;
+
+  function updateName() {
+    userName = document.getElementById('username').value
+    checkLogin()
+  }
+
+  function updatePassword() {
+    userPassword = document.getElementById('password').value
+    checkLogin()
+  }
+
+  function checkLogin() {
+    let button = document.getElementById('login-btn')
+    if (userName !== null && userPassword !== null ) {
+      button.classList.remove('disabled')
+      button.disabled = false
+    }
+  }
+
 </script>
 
 <style>
@@ -60,15 +82,18 @@
   h2 {
     color: #73363D;
   }
+  .disabled {
+    background-color: #746062;
+  }
 </style>
 
 <section class='login-page' style="background-image: url('{bgImage}')">
   <form class='login-form'>
     <img class='logo-image' src= {logo} alt='book basket home logo' />
-    <input placeholder='Username' type='text' maxlength='25'/>
-    <input placeholder='Password' type='password' maxlength='25'/>
+    <input id='username' placeholder='Username' type='text' maxlength='25' on:change={updateName}/>
+    <input id='password' placeholder='Password' type='password' maxlength='25'on:change={updatePassword}/>
     <div class='buttons'>
-      <Link to='/user'><button>Login</button></Link>
+      <Link to='/user'><button disabled='true' id='login-btn' class='disabled'>Login</button></Link>
       <h2>or</h2>
       <Link to='/search'><button>Search For Books</button></Link>
     </div>
