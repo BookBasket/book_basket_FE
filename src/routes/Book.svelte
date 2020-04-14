@@ -4,13 +4,24 @@
 	import { beforeUpdate, afterUpdate } from 'svelte';
 
 	export let chosenBook;
+	let authorNames = '';
 
 	afterUpdate(() => {
 		if (chosenBook !== {}) {
 			chosenBook = chosenBook
+			// findAuthors()
 			console.log(chosenBook)
 		}
 	});
+
+	function findAuthors() {
+		chosenBooks.attributes.authors.data.forEach(author => {
+			console.log(author.attributes.name)
+			authorNames += `${author.attributes.name}`
+		})
+		console.log(authorNames)
+	}
+
 
 </script>
 
@@ -59,7 +70,7 @@
     align-items: right;
 		margin-top: 30px;
 		margin-right: 10px;
-    margin-left: 50px;
+    margin-left: auto;
   }
 	.book-info-buttons {
 		display: flex;
@@ -67,18 +78,24 @@
 		padding: 20px;
 	}
 	.description {
-		width: 1850px;
 		height: 300px;
-		font-size: 20px;
-		line-height: 20px;
+		font-size: 18px;
+		line-height: 22px;
 		padding: 15px;
 		margin: 15px;
+		margin-left: 100px;
+		margin-right: 100px;
 	}
 	.single-book-image {
 		width: 200px;
 		height: 350px;
 		margin: 20px;
 		object-fit: cover;
+		margin-left: 100px;
+	}
+	.book-title {
+		width: 600px;
+		font-size: 28px;
 	}
 
 </style>
@@ -90,7 +107,7 @@
 		<img src={chosenBook.attributes.image_url} class='single-book-image'>
 			<div class='book-info'>
 				<h1 class='book-title'>{chosenBook.attributes.title}</h1>
-				<p class='book-isbn'>Author: {chosenBook.attributes.authors}</p>
+				<p class='book-isbn'>Author: {authorNames} </p>
 				<p class='book-isbn'>Date Published: {chosenBook.attributes.published_date}</p>
 				<p class='book-isbn'>ISBN: {chosenBook.attributes.isbn}</p>
 			</div>
