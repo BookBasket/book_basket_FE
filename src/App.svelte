@@ -20,6 +20,7 @@
   let bookNum;
   let usersReadBooks = [];
   let usersWantToReadBooks = [];
+  let userName = null;
 
   function getBooks() {
     userInput = document.getElementById('user-input').value;
@@ -80,14 +81,17 @@
   }
 
   function deleteBook(id) {
-    const findDeleted = null
+    // const findDeleted = this.state.ideas.filter(idea => idea.id !== id);
+    // this.setState({ ideas: findDeleted })
+    let findDeleted = usersWantToReadBooks.filter(book => book.isbn !== id);
+    usersWantToReadBooks = findDeleted
   }
 
   function updatePastLibrary(bookInfo) {
     let usersAddedBook = bookInfo
     usersReadBooks.push(usersAddedBook);
     console.log(usersAddedBook);
-    // deleteBook()
+    deleteBook(usersAddedBook.isbn)
 
     let header = {
       method: 'PATCH'
@@ -134,12 +138,21 @@
     //   });
   }
 
+  function saveUserName(nameInput) {
+    console.log('name:', nameInput)
+    userName = nameInput
+  }
+
 </script>
 
 <Router url='{url}'>
   <div>
     <Route path='/' component='{Login}' />
-    <Route path='/user' component='{User}' />
+    <Route
+      path='/user'
+      component='{User}'
+      saveUserName='{saveUserName}'
+    />
     <Route
       path='/library-future'
       component='{LibraryFuture}'
