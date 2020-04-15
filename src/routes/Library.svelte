@@ -6,12 +6,73 @@
 	import Book from './Book.svelte';
 
 	let userName = 'Virginia';
-	export let usersWantToReadBooks;
+	// export let usersWantToReadBooks;
 	export let setCurrentBook;
 
 	afterUpdate(() => {
-		usersWantToReadBooks = usersWantToReadBooks
-		console.log(usersWantToReadBooks)
+		let shelfData = {
+ 			// shelf(id: "U2hlbGZPYmplY3Q6Mg==") { id: { type:
+	 		// 	books: { edges: { node: {
+			// 			 'id'
+			// 			 'title'
+			// 			 'summary'
+			// 			' publishedDate'
+			// 			 'imageUrl'
+			// 			 'isbn'
+			// 			 authors: { edges: { node: {
+			// 						 'id'
+			// 						 'name'
+			// 			 }}}
+			// 			 genres: { edges: { node: {
+			// 						 'id'
+			// 						 'type'
+			// 			 }}}}}}}}
+					 }
+	let header = {
+		 method: 'POST',
+		 headers: {
+			 'Content-Type': 'application/json'
+		 },
+		 body:  JSON.stringify({
+  	 	query: "{ shelf(id: 'U2hlbGZPYmplY3Q6Mg==') {
+						    id
+						    type
+						    books {
+						      edges {
+						        node {
+						          id
+						          title
+						          summary
+						          publishedDate
+						          imageUrl
+						          isbn
+						          authors {
+						            edges {
+						              node {
+						                id
+						                name
+						              }
+						            }
+						          }
+						          genres {
+						            edges {
+						              node {
+						                id
+						                type
+						              }
+						            }
+						          }
+						        }
+						      }
+						    }
+						  }
+						} }" })
+
+	 }
+	 fetch('https://book-basket-be.herokuapp.com/graphql', header)
+	 	.then(response => console.log(response))
+		// usersWantToReadBooks = usersWantToReadBooks
+		// console.log(usersWantToReadBooks)
 	});
 
 
@@ -77,6 +138,7 @@
 <section>
 	<h1>{userName}'s Library of Read Books</h1>
 	<section id='bookshelf'>
+		<!-- {#each usersWantToReadBooks as book, i} -->
     {#each usersWantToReadBooks as book, i}
         <div class='each-book'>
           <Link to='/book/{i}' on:click={() =>  setCurrentBook(i)} >
