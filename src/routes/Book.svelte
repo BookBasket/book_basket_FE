@@ -15,6 +15,7 @@
 	let selectedLBtn = false;
 
 	afterUpdate(() => {
+		window.scrollTo(0, 0);
 		changeMonth()
 		if (chosenBook !== {}) {
 			chosenBook = chosenBook
@@ -33,7 +34,6 @@
 	}
 
 	function changeMonth() {
-		console.log(chosenBook);
 		if (!chosenBook.published_date.includes('-')) {
 			return;
 		}
@@ -126,7 +126,7 @@
 		margin-bottom: 300px;
 	}
 	.single-book-image {
-		width: 200px;
+		width: 250px;
 		height: 350px;
 		margin: 20px;
 		object-fit: cover;

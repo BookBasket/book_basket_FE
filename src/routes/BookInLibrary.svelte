@@ -15,6 +15,7 @@
 	let selectedLBtn = false;
 
 	afterUpdate(() => {
+		window.scrollTo(0, 0);
 		changeMonth()
 		if (chosenBook !== {}) {
 			chosenBook = chosenBook
@@ -69,7 +70,7 @@
 
 	function searchAmazon(bookTitle) {
 		searchQuery = bookTitle.split(' ').join('+')
-		// url = `https://www.amazon.com/s?k=${searchQuery}&i=stripbooks&ref=nb_sb_noss_2`
+		url = `https://www.amazon.com/s?k=${searchQuery}&i=stripbooks&ref=nb_sb_noss_2`
 	}
 
 </script>

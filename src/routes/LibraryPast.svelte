@@ -18,7 +18,6 @@
  	 })}
 	 fetch(`https://book-basket-be.herokuapp.com/graphql`, header)
 		 .then(response => response.json())
-		 // .then(response => console.log(response))
 		.then(response => usersReadBooks = response.data.shelf.books.edges)
 		.catch(error => console.log(error))
 

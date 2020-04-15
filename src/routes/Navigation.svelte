@@ -8,15 +8,6 @@
   let search = '../assets/search.svg';
   let library = '../assets/bookshelf.svg';
 
-  // export let userName;
-  //
-  // beforeUpdate(() => {
-	// 	if (userName !== null) {
-	// 		userName = userName
-	// 		console.log('two:', userName)
-	// 	}
-	// })
-
 </script>
 
 <style>
