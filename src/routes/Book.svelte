@@ -17,7 +17,6 @@
 		if (chosenBook !== {}) {
 			chosenBook = chosenBook
 			findAuthors()
-			console.log(chosenBook)
 		}
 	})
 
@@ -40,7 +39,6 @@
 				}
 			}
 		}
-		console.log(month, formatDate)
 	}
 
 	function findAuthors() {
@@ -59,7 +57,6 @@
 
 	function searchAmazon(bookTitle) {
 		searchQuery = bookTitle.split(' ').join('+')
-		console.log(searchQuery);
 		// url = `https://www.amazon.com/s?k=${searchQuery}&i=stripbooks&ref=nb_sb_noss_2`
 	}
 

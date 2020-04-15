@@ -30,7 +30,6 @@
       let textWarning = document.getElementById('warning')
       textWarning.classList.remove('hidden')
     } else {
-      console.log(radioInput, userInput)
       fetch(`https://book-basket-be-staging.herokuapp.com/search?type=${radioInput}&q=${userInput}`)
         .then(response => response.json())
         .then(response => exportBooks(response))
@@ -41,7 +40,6 @@
   function exportBooks(bookImports) {
     books = bookImports.data
     books = books
-    console.log(books)
   }
 
   function updateWarning() {
@@ -60,26 +58,6 @@
 
   function setCurrentBook(bookInput) {
     chosenBook = bookInput.node
-    console.log(chosenBook);
-  }
-
-  function addToLibrary(bookNumInput) {
-    bookNum = bookNumInput
-    let usersAddedBook = books[bookNum].attributes
-    console.log(usersAddedBook);
-    // let header = {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify(usersAddedBook)
-    // }
-    // fetch(`https://book-basket-be-staging.herokuapp.com/create_book?shelf_id=2&title=Cloud Atlas&summary=Testing&image_url=https://images-na.ssl-images-amazon.com/images/I/91RPigWberL.jpg&isbn=1234567&published_date=May 4 2001&author=David Mitchell&author=J K Rowling&genre=fiction&genre=fantasy`, header)
-    //   .then(response => {
-    //     usersWantToReadBooks.push(usersAddedBook);
-    //     console.log(usersWantToReadBooks)
-    //   });th
-    // usersWantToReadBooks.push(usersAddedBook);
   }
 
   function deleteBook(id) {
@@ -92,7 +70,6 @@
   // takes in chosenBook.attributes
   function updatePastLibrary(bookInfo) {
     let usersAddedBook = bookInfo
-    console.log(usersAddedBook);
     deleteBook(usersAddedBook.isbn)
 
     let header = {
@@ -109,7 +86,6 @@
   // takes in chosenBook.attributes
   function updateFutureLibrary(bookInfo) {
     let usersAddedBook = bookInfo
-    console.log(usersAddedBook);
     let header = {
       method: 'POST'
     }
@@ -151,7 +127,6 @@ n    />
       updateBtn='{updateBtn}'
       updateWarning='{updateWarning}'
       setCurrentBook='{setCurrentBook}'
-      addToLibrary='{addToLibrary}'
     />
     <Route
       path='/book/:id'

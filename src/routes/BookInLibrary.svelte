@@ -16,7 +16,6 @@
 		if (chosenBook !== {}) {
 			chosenBook = chosenBook
 			findAuthors()
-			console.log(chosenBook)
 		}
 	})
 
@@ -39,7 +38,6 @@
 				}
 			}
 		}
-		console.log(month, formatDate)
 	}
 
 	function findAuthors() {

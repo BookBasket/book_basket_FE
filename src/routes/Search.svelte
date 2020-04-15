@@ -10,7 +10,6 @@
   export let updateBtn;
   export let updateWarning;
   export let setCurrentBook;
-  export let addToLibrary;
 
 </script>
 
