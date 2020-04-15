@@ -3,14 +3,13 @@
 	import Nav from './Navigation.svelte';
 
 	export let chosenBook;
-	export let updateFutureLibrary;
+	export let updatePastLibrary;
 
 	let authorNames = '';
 	let month = '';
 	let formatDate = [];
 	let url = 'https://amazon.com';
 	let searchQuery;
-
 
 	afterUpdate(() => {
 		changeMonth()
@@ -59,7 +58,6 @@
 		searchQuery = bookTitle.split(' ').join('+')
 		// url = `https://www.amazon.com/s?k=${searchQuery}&i=stripbooks&ref=nb_sb_noss_2`
 	}
-
 
 </script>
 
@@ -110,7 +108,6 @@
 		margin: 15px;
 		margin-left: 100px;
 		margin-right: 100px;
-		margin-bottom: 300px;
 	}
 	.single-book-image {
 		width: 200px;
@@ -147,7 +144,7 @@
 			</div>
 
 			<div class='book-buttons'>
-				<button on:click={() => updateFutureLibrary(chosenBook)}>Add to Want to Read Shelf</button>
+				<button on:click={() => updatePastLibrary(chosenBook)}>Add to Already Read Shelf</button>
 				<button on:hovering={() => searchAmazon(chosenBook.title)}>Search on Amazon</button>
 				<button>Connect to E-Reader</button>
 			</div>

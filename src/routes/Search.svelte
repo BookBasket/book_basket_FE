@@ -10,7 +10,6 @@
   export let updateBtn;
   export let updateWarning;
   export let setCurrentBook;
-  export let addToLibrary;
 
 </script>
 
@@ -155,8 +154,8 @@
   <section id='bookshelf'>
     {#each books as book, i}
         <div class='each-book'>
-          <img class='plus-icon' {src} alt='add to library plus button' on:click={() => addToLibrary(i)}/>
-          <Link to='/book/{i}' on:click={() =>  setCurrentBook(i)} >
+          <img class='plus-icon' {src} alt='add to library plus button' on:click={() => addToFutureLibrary(book.attributes)}/>
+          <Link to='/book/{i}' on:click={() =>  setCurrentBook(book)} >
             <img class='book-pic' src={book.attributes.image_url} />
             <p class='book-title'>{book.attributes.title}</p>
           </Link>
