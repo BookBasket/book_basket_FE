@@ -14,7 +14,7 @@
 			 'Content-Type': 'application/json'
 		 },
 		 body: JSON.stringify({
- 		 "query": `{ shelf(id: "U2hlbGZPYmplY3Q6Mg==") { id type books { edges { node { id title summary publishedDate imageUrl isbn authors { edges { node { id name } } } genres { edges { node { id type } } } } } } } }`
+ 		 "query": `{ shelf(id: "U2hlbGZPYmplY3Q6MQ==") { id type books { edges { node { id title summary publishedDate imageUrl isbn authors { edges { node { id name } } } genres { edges { node { id type } } } } } } } }`
  	 })}
 	 fetch(`https://book-basket-be-staging.herokuapp.com/graphql`, header)
 	 	.then(response => console.log(response))
@@ -94,7 +94,7 @@
 	<section id='bookshelf'>
     {#each usersReadBooks as book, i}
         <div class='each-book'>
-          <Link to='/book/{i}' on:click={() =>  setCurrentBook(i)} >
+          <Link to='/book/{i}' on:click={() =>  setCurrentBook(book)} >
             <img class='book-pic' src={book.image_url} />
             <p class='book-title'>{book.title}</p>
           </Link>
