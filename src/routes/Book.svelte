@@ -22,10 +22,10 @@
 	})
 
 	function changeMonth() {
-	if (!chosenBook.attributes.published_date.includes('-')) {
+	if (!chosenBook.publishedDate.includes('-')) {
 		return;
 	}
-	formatDate = chosenBook.attributes.published_date.split('-');
+	formatDate = chosenBook.publishedDate.split('-');
 	for(var i = 0; i < 13; i++) {
 		let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 		if (formatDate[1] === '10') {
@@ -45,12 +45,12 @@
 
 	function findAuthors() {
 		let newString = '';
-		if(chosenBook.attributes.authors.data.length === 1) {
-			authorNames = chosenBook.attributes.authors.data[0].attributes.name
+		if(chosenBook.authors.edges.length === 1) {
+			authorNames = chosenBook.authors.edges[0].node.name
 			return authorNames
 		} else {
-			chosenBook.attributes.authors.data.forEach(author => {
-				newString += ` ${author.attributes.name} &`
+			chosenBook.authors.edges.forEach(author => {
+				newString += ` ${author.node.name} &`
 			})
 			authorNames = newString.slice(0, -1);
 			return authorNames;
@@ -59,6 +59,7 @@
 
 	function searchAmazon(bookTitle) {
 		searchQuery = bookTitle.split(' ').join('+')
+		console.log(searchQuery);
 		// url = `https://www.amazon.com/s?k=${searchQuery}&i=stripbooks&ref=nb_sb_noss_2`
 	}
 
@@ -136,30 +137,30 @@
 	<Nav />
 	<section class='single-book'>
 		<div class='book-info-buttons'>
-		<img src={chosenBook.attributes.image_url} class='single-book-image'>
+		<img src={chosenBook.imageUrl} class='single-book-image'>
 			<div class='book-info'>
-				<h1 class='book-title'>{chosenBook.attributes.title}</h1>
+				<h1 class='book-title'>{chosenBook.title}</h1>
 				<p class='book-isbn'>Author: {authorNames}</p>
-				{#if !chosenBook.attributes.published_date.includes('-') }
-					<p class='book-isbn'>Date Published: {chosenBook.attributes.published_date}</p>
+				{#if !chosenBook.publishedDate.includes('-') }
+					<p class='book-isbn'>Date Published: {chosenBook.publishedDate}</p>
 				{:else}
 					<p class='book-isbn'>Date Published: {month} {formatDate[2]}, {formatDate[0]}</p>
-					<p class='book-isbn'>ISBN: {chosenBook.attributes.isbn}</p>
+					<p class='book-isbn'>ISBN: {chosenBook.isbn}</p>
 				{/if}
 			</div>
 
 			<div class='book-buttons'>
-				<button on:click={() => updateFutureLibrary(chosenBook.attributes)}>Add to Want to Read Shelf</button>
-				<button on:hovering={() => searchAmazon(chosenBook.attributes.title)}>Search on Amazon</button>
+				<button on:click={() => updateFutureLibrary(chosenBook)}>Add to Want to Read Shelf</button>
+				<button on:hovering={() => searchAmazon(chosenBook.title)}>Search on Amazon</button>
 				<button>Connect to E-Reader</button>
 			</div>
 		</div>
 		<div class='book-description'>
-			{#if chosenBook.attributes.description === ""}
+			{#if chosenBook.summary === ""}
 				<h2 class='book-description-title'>No Description Provided</h2>
 			{:else}
 				<h2 class='book-description-title'>Description</h2>
-				<p class='description'>{chosenBook.attributes.description}</p>
+				<p class='description'>{chosenBook.summary}</p>
 			{/if}
 		</div>
 	</section>
