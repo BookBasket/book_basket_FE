@@ -16,13 +16,16 @@ describe('Login', () => {
 
   it('should take in a username and password', () => {
     cy.get('input').eq(0).type('Hello')
+    cy.get('input').eq(0).should('have.value', 'Hello')
     cy.get('input').eq(1).type('World')
+    cy.get('input').eq(1).should('have.value', 'World')
   })
 
   it('the login button should be disabled until values are entered for username and password', () => {
     cy.get('button').eq(0).should('be.disabled')
     cy.get('input').eq(0).type('Hello')
     cy.get('input').eq(1).type('World')
-    cy.get('button').eq(0).should('be.disabled')
+    cy.get('input').eq(0).click()
+    cy.get('button').eq(0).should('not.be.disabled')
   })
 })
