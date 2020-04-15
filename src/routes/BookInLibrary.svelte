@@ -20,21 +20,21 @@
 	})
 
 	function changeMonth() {
-	if (!chosenBook.publishedDate.includes('-')) {
-		return;
-	}
-	formatDate = chosenBook.publishedDate.split('-');
-	for(var i = 0; i < 13; i++) {
-		let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-		if (formatDate[1] === '10') {
-			month = 'October'
-		} else if (formatDate[1].includes(0)) {
-			if(`0${i}` === formatDate[1]) {
-				month = months[i - 1]
-			}
-		} else {
-			if (`${i}` === formatDate[1]) {
-				month = months[i - 1]
+		if (!chosenBook.publishedDate.includes('-')) {
+			return;
+			formatDate = chosenBook.publishedDate.split('-');
+			for(var i = 0; i < 13; i++) {
+				let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+				if (formatDate[1] === '10') {
+					month = 'October'
+				} else if (formatDate[1].includes(0)) {
+					if(`0${i}` === formatDate[1]) {
+						month = months[i - 1]
+					}
+				} else {
+					if (`${i}` === formatDate[1]) {
+						month = months[i - 1]
+					}
 				}
 			}
 		}
@@ -142,9 +142,8 @@
 					<p class='book-isbn'>ISBN: {chosenBook.isbn}</p>
 				{/if}
 			</div>
-
 			<div class='book-buttons'>
-				<button on:click={() => updatePastLibrary(chosenBook)}>Add to Already Read Shelf</button>
+				<button on:click={() => updatePastLibrary(chosenBook)}>Add to Want to Read Shelf</button>
 				<button on:hovering={() => searchAmazon(chosenBook.title)}>Search on Amazon</button>
 				<button>Connect to E-Reader</button>
 			</div>

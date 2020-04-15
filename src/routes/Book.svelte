@@ -11,7 +11,6 @@
 	let url = 'https://amazon.com';
 	let searchQuery;
 
-
 	afterUpdate(() => {
 		changeMonth()
 		if (chosenBook !== {}) {
@@ -21,44 +20,45 @@
 	})
 
 	function changeMonth() {
-	if (!chosenBook.publishedDate.includes('-')) {
-		return;
-	}
-	formatDate = chosenBook.publishedDate.split('-');
-	for(var i = 0; i < 13; i++) {
-		let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-		if (formatDate[1] === '10') {
-			month = 'October'
-		} else if (formatDate[1].includes(0)) {
-			if(`0${i}` === formatDate[1]) {
-				month = months[i - 1]
-			}
-		} else {
-			if (`${i}` === formatDate[1]) {
-				month = months[i - 1]
+		console.log(chosenBook);
+		if (!chosenBook.published_date.includes('-')) {
+			return;
+		}
+		formatDate = chosenBook.published_date.split('-');
+		for(var i = 0; i < 13; i++) {
+			let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+			if (formatDate[1] === '10') {
+				month = 'October'
+			} else if (formatDate[1].includes(0)) {
+				if(`0${i}` === formatDate[1]) {
+					month = months[i - 1]
+				}
+			} else {
+				if (`${i}` === formatDate[1]) {
+					month = months[i - 1]
+					}
 				}
 			}
 		}
-	}
 
-	function findAuthors() {
-		let newString = '';
-		if(chosenBook.authors.edges.length === 1) {
-			authorNames = chosenBook.authors.edges[0].node.name
-			return authorNames
-		} else {
-			chosenBook.authors.edges.forEach(author => {
-				newString += ` ${author.node.name} &`
-			})
-			authorNames = newString.slice(0, -1);
-			return authorNames;
+		function findAuthors() {
+			let newString = '';
+			if(chosenBook.authors.data.length === 1) {
+				authorNames = chosenBook.authors.data[0].attributes.name
+				return authorNames
+			} else {
+				chosenBook.authors.data.forEach(author => {
+					newString += ` ${author.attributes.name} &`
+				})
+				authorNames = newString.slice(0, -1);
+				return authorNames;
+			}
 		}
-	}
 
-	function searchAmazon(bookTitle) {
-		searchQuery = bookTitle.split(' ').join('+')
-		// url = `https://www.amazon.com/s?k=${searchQuery}&i=stripbooks&ref=nb_sb_noss_2`
-	}
+		function searchAmazon(bookTitle) {
+			searchQuery = bookTitle.split(' ').join('+')
+			// url = `https://www.amazon.com/s?k=${searchQuery}&i=stripbooks&ref=nb_sb_noss_2`
+		}
 
 
 </script>
@@ -134,12 +134,12 @@
 	<Nav />
 	<section class='single-book'>
 		<div class='book-info-buttons'>
-		<img src={chosenBook.imageUrl} class='single-book-image'>
+		<img src={chosenBook.image_url} class='single-book-image'>
 			<div class='book-info'>
 				<h1 class='book-title'>{chosenBook.title}</h1>
 				<p class='book-isbn'>Author: {authorNames}</p>
-				{#if !chosenBook.publishedDate.includes('-') }
-					<p class='book-isbn'>Date Published: {chosenBook.publishedDate}</p>
+				{#if !chosenBook.published_date.includes('-') }
+					<p class='book-isbn'>Date Published: {chosenBook.published_date}</p>
 				{:else}
 					<p class='book-isbn'>Date Published: {month} {formatDate[2]}, {formatDate[0]}</p>
 					<p class='book-isbn'>ISBN: {chosenBook.isbn}</p>
@@ -153,11 +153,11 @@
 			</div>
 		</div>
 		<div class='book-description'>
-			{#if chosenBook.summary === ""}
+			{#if chosenBook.description === ""}
 				<h2 class='book-description-title'>No Description Provided</h2>
 			{:else}
 				<h2 class='book-description-title'>Description</h2>
-				<p class='description'>{chosenBook.summary}</p>
+				<p class='description'>{chosenBook.description}</p>
 			{/if}
 		</div>
 	</section>
