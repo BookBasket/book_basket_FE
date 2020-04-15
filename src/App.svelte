@@ -42,11 +42,6 @@
     books = books
   }
 
-  function updateWarning() {
-    let textWarning = document.getElementById('warning')
-    textWarning.classList.add('hidden')
-  }
-
   function updateBtn() {
     let ele = document.getElementsByName('books');
     for (var i = 0; i < ele.length; i++) {
@@ -66,7 +61,6 @@
 
   // runs from BookInLibrary component
   // adds want to read book to already read book
-  // takes in chosenBook.attributes
   function updatePastLibrary(bookInfo) {
     let usersAddedBook = bookInfo
     let header = {
@@ -80,7 +74,6 @@
 
   // runs in Book component
   // moves book from search results to Want to Read LibraryPast
-  // takes in chosenBook.attributes
   function updateFutureLibrary(bookInfo) {
     let header = {
       method: 'POST'
@@ -123,7 +116,6 @@ n    />
       getBooks='{getBooks}'
       books='{books}'
       updateBtn='{updateBtn}'
-      updateWarning='{updateWarning}'
       setCurrentBook='{setCurrentBook}'
       updateFutureLibrary='{updateFutureLibrary}'
     />

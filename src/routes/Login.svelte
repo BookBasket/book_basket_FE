@@ -6,16 +6,9 @@
 
   export let userName;
   let userPassword = null;
-  // export let saveUserName;
-
-  // function saveUserName(nameInput) {
-  //   console.log('name:', nameInput)
-  //   userName = nameInput
-  // }
 
   function updateName() {
     userName = document.getElementById('username').value
-    // saveUserName(userName)
     checkLogin()
   }
 
