@@ -8,7 +8,6 @@
   export let books;
   export let getBooks;
   export let updateBtn;
-  export let updateWarning;
   export let setCurrentBook;
   export let updateFutureLibrary;
 
@@ -17,6 +16,14 @@
     plusIcon.classList.add('rotate-center')
     updateFutureLibrary(book)
   }
+
+  function updateWarning() {
+    let inputValue = document.querySelector('#user-input')
+    inputValue.value = ''
+    let textWarning = document.getElementById('warning')
+    textWarning.classList.add('hidden')
+  }
+
 
 </script>
 
