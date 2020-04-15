@@ -21,6 +21,7 @@
   let usersReadBooks = [];
   let usersWantToReadBooks = [];
   let userName = null;
+  let saveUserName;
 
   function getBooks() {
     userInput = document.getElementById('user-input').value;
@@ -77,7 +78,6 @@
     //     console.log(usersWantToReadBooks)
     //   });th
     usersWantToReadBooks.push(usersAddedBook);
-    // usersReadBooks.push(usersAddedBook);
   }
 
   function deleteBook(id) {
@@ -87,6 +87,9 @@
     usersWantToReadBooks = findDeleted
   }
 
+  // runs from BookInLibrary component
+  // adds want to read book to already read book
+  // takes in chosenBook.attributes
   function updatePastLibrary(bookInfo) {
     let usersAddedBook = bookInfo
     usersReadBooks.push(usersAddedBook);
@@ -117,6 +120,10 @@
     //   });
   }
 
+
+  // runs in Book component
+  // moves book from search results to Want to Read LibraryPast
+  // takes in chosenBook.attributes
   function updateFutureLibrary(bookInfo) {
     let usersAddedBook = bookInfo
     console.log(usersAddedBook);
@@ -138,21 +145,21 @@
     //   });
   }
 
-  function saveUserName(nameInput) {
-    console.log('name:', nameInput)
-    userName = nameInput
-  }
+
 
 </script>
 
 <Router url='{url}'>
   <div>
-    <Route path='/' component='{Login}' />
+    <Route
+      path='/'
+      component='{Login}'
+      saveUserName='{saveUserName}'
+    />
     <Route
       path='/user'
       component='{User}'
-      saveUserName='{saveUserName}'
-    />
+n    />
     <Route
       path='/library-future'
       component='{LibraryFuture}'
