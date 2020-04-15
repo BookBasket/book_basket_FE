@@ -22,6 +22,7 @@
   let usersWantToReadBooks = [];
   let userName = null;
   let saveUserName;
+  let chosenBook;
 
   function getBooks() {
     userInput = document.getElementById('user-input').value;
@@ -57,8 +58,9 @@
     }
   }
 
-  function setCurrentBook(bookNumInput) {
-    bookNum = bookNumInput
+  function setCurrentBook(bookInput) {
+    chosenBook = bookInput.node
+    console.log(chosenBook);
   }
 
   function addToLibrary(bookNumInput) {
@@ -77,12 +79,10 @@
     //     usersWantToReadBooks.push(usersAddedBook);
     //     console.log(usersWantToReadBooks)
     //   });th
-    usersWantToReadBooks.push(usersAddedBook);
+    // usersWantToReadBooks.push(usersAddedBook);
   }
 
   function deleteBook(id) {
-    // const findDeleted = this.state.ideas.filter(idea => idea.id !== id);
-    // this.setState({ ideas: findDeleted })
     let findDeleted = usersWantToReadBooks.filter(book => book.isbn !== id);
     usersWantToReadBooks = findDeleted
   }
@@ -92,32 +92,15 @@
   // takes in chosenBook.attributes
   function updatePastLibrary(bookInfo) {
     let usersAddedBook = bookInfo
-    usersReadBooks.push(usersAddedBook);
     console.log(usersAddedBook);
     deleteBook(usersAddedBook.isbn)
 
     let header = {
       method: 'PATCH'
     }
-    fetch(`https://book-basket-be-staging.herokuapp.com/switch_shelves?isbn=${bookInfo.isbn}`)
+    fetch(`https://book-basket-be.herokuapp.com/switch_shelves?isbn=${bookInfo.isbn}`)
         .then(response => console.log(response))
         .catch(error => console.log(error))
-
-    // bookNum = bookInfo
-    // let usersAddedBook = books[bookNum]
-    // console.log(usersAddedBook);
-    // let header = {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify(usersAddedBook)
-    // }
-    // fetch(`https://book-basket-be-staging.herokuapp.com/create_book?shelf_id=2&title=Cloud Atlas&summary=Testing&image_url=https://images-na.ssl-images-amazon.com/images/I/91RPigWberL.jpg&isbn=1234567&published_date=May 4 2001&author=David Mitchell&author=J K Rowling&genre=fiction&genre=fantasy`, header)
-    //   .then(response => {
-    //     usersReadBooks.push(usersAddedBook);
-    //     console.log(usersWantToReadBooks)
-    //   });
   }
 
 
@@ -127,22 +110,11 @@
   function updateFutureLibrary(bookInfo) {
     let usersAddedBook = bookInfo
     console.log(usersAddedBook);
-    usersWantToReadBooks.push(usersAddedBook);
-
-    // let usersAddedBook = books[bookNum]
-    // console.log(usersAddedBook);
-    // let header = {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify(usersAddedBook)
-    // }
-    // fetch(`https://book-basket-be-staging.herokuapp.com/create_book?shelf_id=2&title=Cloud Atlas&summary=Testing&image_url=https://images-na.ssl-images-amazon.com/images/I/91RPigWberL.jpg&isbn=1234567&published_date=May 4 2001&author=David Mitchell&author=J K Rowling&genre=fiction&genre=fantasy`, header)
-    //   .then(response => {
-    //     usersWantToReadBooks.push(usersAddedBook);
-    //     console.log(usersWantToReadBooks)
-    //   });
+    let header = {
+      method: 'POST'
+    }
+    fetch(`http://book-basket-be.herokuapp.com/create_book?author=${usersAddedBook.authors}&genre=${usersAddedBook.genres}&title=${usersAddedBook.title}&isbn=${usersAddedBook.isbn}&date_published=${usersAddedBook.date_published}&summary=${usersAddedBook.summary}&image_url=${usersAddedBook.image_url}`, header)
+      .then(response => console.log(response));
   }
 
 
@@ -163,7 +135,6 @@ n    />
     <Route
       path='/library-future'
       component='{LibraryFuture}'
-      usersWantToReadBooks='{usersWantToReadBooks}'
       setCurrentBook='{setCurrentBook}'
     />
     <Route
@@ -185,13 +156,13 @@ n    />
     <Route
       path='/book/:id'
       component='{Book}'
-      chosenBook='{books[bookNum]}'
+      chosenBook='{chosenBook}'
       updateFutureLibrary='{updateFutureLibrary}'
     />
     <Route
       path='/users-book/:id'
       component='{BookInLibrary}'
-      chosenBook='{books[bookNum]}'
+      chosenBook='{chosenBook}'
       updatePastLibrary='{updatePastLibrary}'
     />
     <Route component='{Login}' />
