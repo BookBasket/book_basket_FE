@@ -5,7 +5,7 @@
 	import Nav from './Navigation.svelte';
 	import Book from './Book.svelte';
 
-	export let usersWantToReadBooks;
+	let usersWantToReadBooks = [];
 	export let setCurrentBook;
 
 	afterUpdate(() => {
@@ -18,19 +18,22 @@
   	 	"query": `{ shelf(id: "U2hlbGZPYmplY3Q6Mg==") { id type books { edges { node { id title summary publishedDate imageUrl isbn authors { edges { node { id name } } } genres { edges { node { id type } } } } } } } }`
 		})}
 	 fetch(`https://book-basket-be-staging.herokuapp.com/graphql`, header)
-	 	.then(response => console.log(response))
+	 	.then(response => response.json())
+		.then(response => usersWantToReadBooks = response.data.shelf.books.edges)
 		.catch(error => console.log(error))
 
-		usersWantToReadBooks = usersWantToReadBooks
 	});
 
+	function setLibrary(allBooks) {
+		usersWantToReadBooks = allBooks
+	}
 
 </script>
 
 <style>
 	h1 {
 		margin-left: 100px;
-		font-size: 30px;
+		font-size: 24px;
 		color: #73363D;
 	}
 
@@ -94,9 +97,9 @@
 	<section id='bookshelf'>
 	    {#each usersWantToReadBooks as book, i}
 	        <div class='each-book'>
-	          <Link to='/users-book/{i}' on:click={() =>  setCurrentBook(i)} >
-	            <img class='book-pic' src={book.image_url} />
-	            <p class='book-title'>{book.title}</p>
+	          <Link to='/users-book/{i}' on:click={() =>  setCurrentBook(book)} >
+	            <img class='book-pic' src={book.node.imageUrl} />
+	            <p class='book-title'>{book.node.title}</p>
 	          </Link>
 	        </div>
     {:else}
