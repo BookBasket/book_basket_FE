@@ -5,7 +5,6 @@
 	import Nav from './Navigation.svelte';
 	import Book from './Book.svelte';
 
-	let userName = 'Virginia';
 	export let usersWantToReadBooks;
 	export let setCurrentBook;
 
@@ -16,36 +15,8 @@
 			 'Content-Type': 'application/json'
 		 },
 		 body: JSON.stringify({
-  	 	query: `{
-				book(id: "U2hlbGZPYmplY3Q6Mg==") {
-					id
-					title
-					shelves {
-						edges {
-							node {
-								id
-								type
-							}
-						}
-					}
-					genres {
-						edges {
-							node {
-								id
-								type
-							}
-						}
-					}
-					authors {
-						edges {
-							node {
-								id
-								name
-							}
-						}
-					}
-				}`
-	 	 })}
+  	 	"query": `{ shelf(id: "U2hlbGZPYmplY3Q6Mg==") { id type books { edges { node { id title summary publishedDate imageUrl isbn authors { edges { node { id name } } } genres { edges { node { id type } } } } } } } }`
+		})}
 	 fetch(`https://book-basket-be-staging.herokuapp.com/graphql`, header)
 	 	.then(response => console.log(response))
 		.catch(error => console.log(error))
@@ -57,6 +28,11 @@
 </script>
 
 <style>
+	h1 {
+		margin-left: 100px;
+		font-size: 30px;
+		color: #73363D;
+	}
 
 	.library {
 		display: flex;
@@ -114,7 +90,7 @@
 </style>
 <Nav />
 <section>
-	<h1>{userName}'s Library of Read Books</h1>
+	<h1>Library of Want to Read Books</h1>
 	<section id='bookshelf'>
 	    {#each usersWantToReadBooks as book, i}
 	        <div class='each-book'>
