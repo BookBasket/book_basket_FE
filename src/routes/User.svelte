@@ -1,10 +1,12 @@
-<script context='module'>
+<script>
   import { Link } from 'svelte-routing';
+  import { afterUpdate } from 'svelte';
 
   import Nav from './Navigation.svelte';
 
   let bgImage = './assets/basket-bg.jpg';
   let logo = './assets/BB-Logo-White.png';
+
 </script>
 
 <style>

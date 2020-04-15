@@ -1,13 +1,21 @@
 <script context='module'>
   import { Link } from 'svelte-routing';
+  import Nav from './Navigation.svelte';
   let bgImage = './assets/basket-bg.jpg';
   let logo = './assets/BB-Logo-White.png';
 
-  let userName = null;
+  export let userName;
   let userPassword = null;
+  // export let saveUserName;
+
+  // function saveUserName(nameInput) {
+  //   console.log('name:', nameInput)
+  //   userName = nameInput
+  // }
 
   function updateName() {
     userName = document.getElementById('username').value
+    // saveUserName(userName)
     checkLogin()
   }
 
@@ -24,11 +32,12 @@
     }
   }
 
+
 </script>
 
 <style>
   .login-page {
-    background-size: 120%;
+    background-size: 130%;
     background-repeat: no-repeat;
     background-color: saddlebrown;
     height: 100vh;
@@ -85,9 +94,15 @@
   .disabled {
     background-color: #746062;
   }
+  .hidden {
+    display: none;
+  }
 </style>
 
 <section class='login-page' style="background-image: url('{bgImage}')">
+  <div class='hidden'>
+    <Nav userName={userName} />
+  </div>
   <form class='login-form'>
     <img class='logo-image' src= {logo} alt='book basket home logo' />
     <input id='username' placeholder='Username' type='text' maxlength='25' on:change={updateName}/>
