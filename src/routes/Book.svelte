@@ -8,6 +8,9 @@
 	let authorNames = '';
 	let month = '';
 	let formatDate = [];
+	let url = 'https://amazon.com';
+	let searchQuery;
+
 
 	afterUpdate(() => {
 		changeMonth()
@@ -53,6 +56,12 @@
 			return authorNames;
 		}
 	}
+
+	function searchAmazon(bookTitle) {
+		searchQuery = bookTitle.split(' ').join('+')
+		// url = `https://www.amazon.com/s?k=${searchQuery}&i=stripbooks&ref=nb_sb_noss_2`
+	}
+
 
 </script>
 
@@ -103,6 +112,7 @@
 		margin: 15px;
 		margin-left: 100px;
 		margin-right: 100px;
+		margin-bottom: 300px;
 	}
 	.single-book-image {
 		width: 200px;
@@ -140,7 +150,7 @@
 
 			<div class='book-buttons'>
 				<button on:click={() => updateFutureLibrary(chosenBook.attributes)}>Add to Want to Read Shelf</button>
-				<button>Search on Amazon</button>
+				<button on:hovering={() => searchAmazon(chosenBook.attributes.title)}>Search on Amazon</button>
 				<button>Connect to E-Reader</button>
 			</div>
 		</div>
