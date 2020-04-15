@@ -34,7 +34,6 @@
 	}
 
 	function changeMonth() {
-		console.log(chosenBook);
 		if (!chosenBook.published_date.includes('-')) {
 			return;
 		}

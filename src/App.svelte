@@ -60,7 +60,6 @@
   }
 
   // runs from BookInLibrary component
-  // adds want to read book to already read book
   function updatePastLibrary(bookInfo) {
     let usersAddedBook = bookInfo
     let header = {
@@ -73,7 +72,6 @@
 
 
   // runs in Book component
-  // moves book from search results to Want to Read LibraryPast
   function updateFutureLibrary(bookInfo) {
     let header = {
       method: 'POST'
