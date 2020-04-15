@@ -16,8 +16,10 @@
 		 body: JSON.stringify({
  		 "query": `{ shelf(id: "U2hlbGZPYmplY3Q6MQ==") { id type books { edges { node { id title summary publishedDate imageUrl isbn authors { edges { node { id name } } } genres { edges { node { id type } } } } } } } }`
  	 })}
-	 fetch(`https://book-basket-be-staging.herokuapp.com/graphql`, header)
-	 	.then(response => console.log(response))
+	 fetch(`https://book-basket-be.herokuapp.com/graphql`, header)
+		 .then(response => response.json())
+		 // .then(response => console.log(response))
+		.then(response => usersReadBooks = response.data.shelf.books.edges)
 		.catch(error => console.log(error))
 
 		usersReadBooks = usersReadBooks
@@ -94,9 +96,9 @@
 	<section id='bookshelf'>
     {#each usersReadBooks as book, i}
         <div class='each-book'>
-          <Link to='/book/{i}' on:click={() =>  setCurrentBook(book)} >
-            <img class='book-pic' src={book.image_url} />
-            <p class='book-title'>{book.title}</p>
+          <Link to='/users-book/{i}' on:click={() =>  setCurrentBook(book)} >
+            <img class='book-pic' src={book.node.imageUrl} />
+            <p class='book-title'>{book.node.title}</p>
           </Link>
         </div>
     {:else}
