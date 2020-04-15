@@ -3,7 +3,7 @@
 	import Nav from './Navigation.svelte';
 
 	export let chosenBook;
-	export let updateFutureLibrary;
+	export let updatePastLibrary;
 
 	let authorNames = '';
 	let month = '';
@@ -139,7 +139,7 @@
 			</div>
 
 			<div class='book-buttons'>
-				<button on:click={() => updateFutureLibrary(chosenBook.attributes)}>Add to Want to Read Shelf</button>
+				<button on:click={() => updatePastLibrary(chosenBook.attributes)}>Add to Already Read Shelf</button>
 				<button>Search on Amazon</button>
 				<button>Connect to E-Reader</button>
 			</div>

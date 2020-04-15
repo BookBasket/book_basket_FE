@@ -43,8 +43,8 @@
 <section class='library-page' style="background-image: url('{bgImage}')">
   <Nav />
   <div class='blur'>
-    <Link to='/library-future'><button>Already Read Books</button></Link>
-    <Link to='/library-past'><button>Want to Read Books</button></Link>
+    <Link to='/library-future'><button>Want to Read Books</button></Link>
+    <Link to='/library-past'><button>Already Read Books</button></Link>
     <Link to='/search'><button>Search For New Book</button></Link>
   </div>
 </section>

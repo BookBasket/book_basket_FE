@@ -6,73 +6,50 @@
 	import Book from './Book.svelte';
 
 	let userName = 'Virginia';
-	// export let usersWantToReadBooks;
+	export let usersReadBooks;
 	export let setCurrentBook;
 
-	afterUpdate(() => {
-		let shelfData = {
- 			// shelf(id: "U2hlbGZPYmplY3Q6Mg==") { id: { type:
-	 		// 	books: { edges: { node: {
-			// 			 'id'
-			// 			 'title'
-			// 			 'summary'
-			// 			' publishedDate'
-			// 			 'imageUrl'
-			// 			 'isbn'
-			// 			 authors: { edges: { node: {
-			// 						 'id'
-			// 						 'name'
-			// 			 }}}
-			// 			 genres: { edges: { node: {
-			// 						 'id'
-			// 						 'type'
-			// 			 }}}}}}}}
-					 }
-	let header = {
+	afterUpdate(() => {	let header = {
 		 method: 'POST',
 		 headers: {
 			 'Content-Type': 'application/json'
 		 },
-		 body:  JSON.stringify({
-  	 	query: "{ shelf(id: 'U2hlbGZPYmplY3Q6Mg==') {
-						    id
-						    type
-						    books {
-						      edges {
-						        node {
-						          id
-						          title
-						          summary
-						          publishedDate
-						          imageUrl
-						          isbn
-						          authors {
-						            edges {
-						              node {
-						                id
-						                name
-						              }
-						            }
-						          }
-						          genres {
-						            edges {
-						              node {
-						                id
-						                type
-						              }
-						            }
-						          }
-						        }
-						      }
-						    }
-						  }
-						} }" })
-
-	 }
-	 fetch('https://book-basket-be.herokuapp.com/graphql', header)
+		 body: JSON.stringify({
+  	 	query: `{
+				book(id: "Qm9va09iamVjdDoxMQ==") {
+					id
+					title
+					shelves {
+						edges {
+							node {
+								id
+								type
+							}
+						}
+					}
+					genres {
+						edges {
+							node {
+								id
+								type
+							}
+						}
+					}
+					authors {
+						edges {
+							node {
+								id
+								name
+							}
+						}
+					}
+				}`
+	 	 })}
+	 fetch(`https://book-basket-be-staging.herokuapp.com/graphql`, header)
 	 	.then(response => console.log(response))
-		// usersWantToReadBooks = usersWantToReadBooks
-		// console.log(usersWantToReadBooks)
+		.catch(error => console.log(error))
+
+		usersReadBooks = usersReadBooks
 	});
 
 
@@ -138,8 +115,7 @@
 <section>
 	<h1>{userName}'s Library of Read Books</h1>
 	<section id='bookshelf'>
-		<!-- {#each usersWantToReadBooks as book, i} -->
-    {#each usersWantToReadBooks as book, i}
+    {#each usersReadBooks as book, i}
         <div class='each-book'>
           <Link to='/book/{i}' on:click={() =>  setCurrentBook(i)} >
             <img class='book-pic' src={book.image_url} />

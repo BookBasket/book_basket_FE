@@ -1,11 +1,13 @@
 <script>
   import { Router, Route, Link } from 'svelte-routing';
-  import Library from './routes/Library.svelte';
+  import LibraryPast from './routes/LibraryPast.svelte';
+  import LibraryFuture from './routes/LibraryFuture.svelte';
   import User from './routes/User.svelte';
   import Login from './routes/Login.svelte';
   import Search from './routes/Search.svelte';
   import NotFound from './routes/BadPath.svelte';
   import Book from './routes/Book.svelte';
+  import BookInLibrary from './routes/BookInLibrary.svelte';
 
   export let url='';
 
@@ -61,19 +63,75 @@
     bookNum = bookNumInput
     let usersAddedBook = books[bookNum].attributes
     console.log(usersAddedBook);
+    // let header = {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify(usersAddedBook)
+    // }
+    // fetch(`https://book-basket-be-staging.herokuapp.com/create_book?shelf_id=2&title=Cloud Atlas&summary=Testing&image_url=https://images-na.ssl-images-amazon.com/images/I/91RPigWberL.jpg&isbn=1234567&published_date=May 4 2001&author=David Mitchell&author=J K Rowling&genre=fiction&genre=fantasy`, header)
+    //   .then(response => {
+    //     usersWantToReadBooks.push(usersAddedBook);
+    //     console.log(usersWantToReadBooks)
+    //   });th
+    usersWantToReadBooks.push(usersAddedBook);
+    // usersReadBooks.push(usersAddedBook);
+  }
+
+  function deleteBook(id) {
+    const findDeleted = null
+  }
+
+  function updatePastLibrary(bookInfo) {
+    let usersAddedBook = bookInfo
+    usersReadBooks.push(usersAddedBook);
+    console.log(usersAddedBook);
+    // deleteBook()
+
     let header = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(usersAddedBook)
+      method: 'PATCH'
     }
-    fetch(`https://book-basket-be-staging.herokuapp.com/create_book?shelf_id=2&title=Cloud Atlas&summary=Testing&image_url=https://images-na.ssl-images-amazon.com/images/I/91RPigWberL.jpg&isbn=1234567&published_date=May 4 2001&author=David Mitchell&author=J K Rowling&genre=fiction&genre=fantasy`, header)
-      .then(response => {
-        console.log(response)
-        // usersWantToReadBooks.push(usersAddedBook);
-      });
-    // usersWantToReadBooks.push(usersAddedBook);
+    fetch(`https://book-basket-be-staging.herokuapp.com/switch_shelves?isbn=${bookInfo.isbn}`)
+        .then(response => console.log(response))
+        .catch(error => console.log(error))
+
+    // bookNum = bookInfo
+    // let usersAddedBook = books[bookNum]
+    // console.log(usersAddedBook);
+    // let header = {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify(usersAddedBook)
+    // }
+    // fetch(`https://book-basket-be-staging.herokuapp.com/create_book?shelf_id=2&title=Cloud Atlas&summary=Testing&image_url=https://images-na.ssl-images-amazon.com/images/I/91RPigWberL.jpg&isbn=1234567&published_date=May 4 2001&author=David Mitchell&author=J K Rowling&genre=fiction&genre=fantasy`, header)
+    //   .then(response => {
+    //     usersReadBooks.push(usersAddedBook);
+    //     console.log(usersWantToReadBooks)
+    //   });
+  }
+
+  function updateFutureLibrary(bookInfo) {
+    let usersAddedBook = bookInfo
+    console.log(usersAddedBook);
+    usersWantToReadBooks.push(usersAddedBook);
+
+    // let usersAddedBook = books[bookNum]
+    // console.log(usersAddedBook);
+    // let header = {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify(usersAddedBook)
+    // }
+    // fetch(`https://book-basket-be-staging.herokuapp.com/create_book?shelf_id=2&title=Cloud Atlas&summary=Testing&image_url=https://images-na.ssl-images-amazon.com/images/I/91RPigWberL.jpg&isbn=1234567&published_date=May 4 2001&author=David Mitchell&author=J K Rowling&genre=fiction&genre=fantasy`, header)
+    //   .then(response => {
+    //     usersWantToReadBooks.push(usersAddedBook);
+    //     console.log(usersWantToReadBooks)
+    //   });
   }
 
 </script>
@@ -84,13 +142,14 @@
     <Route path='/user' component='{User}' />
     <Route
       path='/library-future'
-      component='{Library}'
+      component='{LibraryFuture}'
+      usersWantToReadBooks='{usersWantToReadBooks}'
       setCurrentBook='{setCurrentBook}'
     />
     <Route
       path='/library-past'
-      component='{Library}'
-      usersWantToReadBooks='{usersWantToReadBooks}'
+      component='{LibraryPast}'
+      usersReadBooks='{usersReadBooks}'
       setCurrentBook='{setCurrentBook}'
     />
     <Route
@@ -107,6 +166,13 @@
       path='/book/:id'
       component='{Book}'
       chosenBook='{books[bookNum]}'
+      updateFutureLibrary='{updateFutureLibrary}'
+    />
+    <Route
+      path='/users-book/:id'
+      component='{BookInLibrary}'
+      chosenBook='{books[bookNum]}'
+      updatePastLibrary='{updatePastLibrary}'
     />
     <Route component='{Login}' />
   </div>
