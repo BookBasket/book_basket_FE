@@ -126,7 +126,7 @@
 		margin-bottom: 300px;
 	}
 	.single-book-image {
-		width: 200px;
+		width: 250px;
 		height: 350px;
 		margin: 20px;
 		object-fit: cover;

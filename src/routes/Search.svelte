@@ -78,7 +78,8 @@
     width: 180px;
     margin: 30px;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
+    text-decoration: none;
   }
   .book-pic {
     height: 200px;
@@ -87,8 +88,8 @@
     box-shadow: 10px 0px 10px 0px rgba(0,0,0,0.5);
   }
   .book-title {
+    text-decoration: none;
     font-size: 18px;
-    text-align: center;
   }
   .plus-icon {
     position: absolute;
