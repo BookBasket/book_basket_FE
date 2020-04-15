@@ -57,25 +57,23 @@
   }
 
   function setCurrentBook(bookInput) {
-    chosenBook = bookInput.node
-  }
-
-  function deleteBook(id) {
-    let findDeleted = usersWantToReadBooks.filter(book => book.isbn !== id);
-    usersWantToReadBooks = findDeleted
+    if(bookInput.node === undefined) {
+      chosenBook = bookInput.attributes
+    } else {
+      chosenBook = bookInput.node
+    }
   }
 
   // runs from BookInLibrary component
   // adds want to read book to already read book
   // takes in chosenBook.attributes
   function updatePastLibrary(bookInfo) {
+    console.log(bookInfo);
     let usersAddedBook = bookInfo
-    deleteBook(usersAddedBook.isbn)
-
     let header = {
       method: 'PATCH'
     }
-    fetch(`https://book-basket-be.herokuapp.com/switch_shelves?isbn=${bookInfo.isbn}`)
+    fetch(`https://book-basket-be.herokuapp.com/switch_shelves?isbn=${usersAddedBook.isbn}`, header)
         .then(response => console.log(response))
         .catch(error => console.log(error))
   }
@@ -127,6 +125,7 @@ n    />
       updateBtn='{updateBtn}'
       updateWarning='{updateWarning}'
       setCurrentBook='{setCurrentBook}'
+      updateFutureLibrary='{updateFutureLibrary}'
     />
     <Route
       path='/book/:id'
