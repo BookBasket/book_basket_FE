@@ -10,6 +10,9 @@
 	let formatDate = [];
 	let url = 'https://amazon.com';
 	let searchQuery;
+	let selectedEBtn = false;
+	let selectedABtn = false;
+	let selectedLBtn = false;
 
 	afterUpdate(() => {
 		changeMonth()
@@ -18,6 +21,16 @@
 			findAuthors()
 		}
 	})
+
+	function updateEBtnValue() {
+		selectedEBtn = true;
+	}
+	function updateLBtnValue() {
+		selectedLBtn = true;
+	}
+	function updateABtnValue() {
+		selectedABtn = true;
+	}
 
 	function changeMonth() {
 		if (!chosenBook.publishedDate.includes('-')) {
@@ -143,9 +156,21 @@
 				{/if}
 			</div>
 			<div class='book-buttons'>
-				<button on:click={() => updatePastLibrary(chosenBook)}>Add to Want to Read Shelf</button>
-				<button on:hovering={() => searchAmazon(chosenBook.title)}>Search on Amazon</button>
-				<button>Connect to E-Reader</button>
+				{#if selectedLBtn === false}
+				<button on:click={() => updatePastLibrary(chosenBook)} on:click={updateLBtnValue}>Add to Already Read Shelf</button>
+				{:else}
+				<button class='clicked' on:click={() => updatePastLibrary(chosenBook)}>Added!</button>
+				{/if}
+				{#if selectedABtn === false}
+				<a href='{url}'><button on:click={() => searchAmazon(chosenBook.title)} on:click={updateABtnValue}>Search on Amazon</button></a>
+				{:else}
+				<button class='clicked'}>Click to Search!</button>
+				{/if}
+				{#if selectedEBtn === false}
+				<button on:click={updateEBtnValue}>Connect to E-Reader</button>
+				{:else}
+				<button class='clicked' >Click to Connect</button>
+				{/if}
 			</div>
 		</div>
 		<div class='book-description'>
