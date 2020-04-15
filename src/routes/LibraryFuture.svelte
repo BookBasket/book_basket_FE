@@ -16,36 +16,9 @@
 			 'Content-Type': 'application/json'
 		 },
 		 body: JSON.stringify({
-  	 	query: `{
-				book(id: "Qm9va09iamVjdDoxMQ==") {
-					id
-					title
-					shelves {
-						edges {
-							node {
-								id
-								type
-							}
-						}
-					}
-					genres {
-						edges {
-							node {
-								id
-								type
-							}
-						}
-					}
-					authors {
-						edges {
-							node {
-								id
-								name
-							}
-						}
-					}
-				}`
-	 	 })}
+				'query': `{ shelf(id: "U2hlbGZPYmplY3Q6Mg==") { id type books { edges { node { id title summary publishedDate imageUrl isbn authors { edges { node { id name } } } genres { edges { node { id type } } } } } } } }`
+		 })
+		}
 	 fetch(`https://book-basket-be-staging.herokuapp.com/graphql`, header)
 	 	.then(response => console.log(response))
 		.catch(error => console.log(error))
