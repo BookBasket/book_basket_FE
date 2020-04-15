@@ -10,6 +10,7 @@
   export let updateBtn;
   export let updateWarning;
   export let setCurrentBook;
+  export let updateFutureLibrary;
 
 </script>
 
@@ -61,25 +62,27 @@
   .each-book {
     display: flex;
     flex-direction: column;
-    width: 200px;
-    margin: 10px;
+    width: 180px;
+    margin: 30px;
     align-items: center;
+    justify-content: flex-start;
   }
   .book-pic {
     height: 200px;
-    width: 120px;
+    width: 130px;
     object-fit: cover;
     box-shadow: 10px 0px 10px 0px rgba(0,0,0,0.5);
   }
   .book-title {
     font-size: 18px;
     text-align: center;
+    /* margin-left: -25px; */
   }
   .plus-icon {
     position: absolute;
     height: 30px;
     margin-top: 15px;
-    margin-left: 60px;
+    margin-left: 40px;
     visibility: hidden;
   }
   .each-book:hover .plus-icon {
@@ -154,7 +157,7 @@
   <section id='bookshelf'>
     {#each books as book, i}
         <div class='each-book'>
-          <img class='plus-icon' {src} alt='add to library plus button' on:click={() => addToFutureLibrary(book.attributes)}/>
+          <img class='plus-icon' {src} alt='add to library plus button' on:click={() => updateFutureLibrary(book.attributes)}/>
           <Link to='/book/{i}' on:click={() =>  setCurrentBook(book)} >
             <img class='book-pic' src={book.attributes.image_url} />
             <p class='book-title'>{book.attributes.title}</p>
