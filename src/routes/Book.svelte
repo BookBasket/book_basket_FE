@@ -15,6 +15,7 @@
 	let selectedLBtn = false;
 
 	afterUpdate(() => {
+		window.scrollTo(0, 0);
 		changeMonth()
 		if (chosenBook !== {}) {
 			chosenBook = chosenBook
