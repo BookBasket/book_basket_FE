@@ -12,6 +12,12 @@
   export let setCurrentBook;
   export let updateFutureLibrary;
 
+  function addUpdates(book, id) {
+    let plusIcon = document.getElementById(`${id}`)
+    plusIcon.classList.add('rotate-center')
+    updateFutureLibrary(book)
+  }
+
 </script>
 
 <style>
@@ -76,7 +82,6 @@
   .book-title {
     font-size: 18px;
     text-align: center;
-    /* margin-left: -25px; */
   }
   .plus-icon {
     position: absolute;
@@ -99,6 +104,31 @@
     margin-top: -40px;
     font-size: 18px;
   }
+  .rotate-center {
+	   -webkit-animation: rotate-center 0.6s ease-in-out both;
+	        animation: rotate-center 0.6s ease-in-out both;
+  }
+  @-webkit-keyframes rotate-center {
+    0% {
+      -webkit-transform: rotate(0);
+              transform: rotate(0);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+              transform: rotate(360deg);
+    }
+  }
+  @keyframes rotate-center {
+    0% {
+      -webkit-transform: rotate(0);
+              transform: rotate(0);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+              transform: rotate(360deg);
+    }
+  }
+
 </style>
 
 <section>
@@ -157,7 +187,7 @@
   <section id='bookshelf'>
     {#each books as book, i}
         <div class='each-book'>
-          <img class='plus-icon' {src} alt='add to library plus button' on:click={() => updateFutureLibrary(book.attributes)}/>
+          <img class='plus-icon' id='{i}' {src} alt='add to library plus button' on:click={() => addUpdates(book.attributes, i)}/>
           <Link to='/book/{i}' on:click={() =>  setCurrentBook(book)} >
             <img class='book-pic' src={book.attributes.image_url} />
             <p class='book-title'>{book.attributes.title}</p>

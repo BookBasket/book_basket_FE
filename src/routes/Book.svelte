@@ -10,6 +10,9 @@
 	let formatDate = [];
 	let url = 'https://amazon.com';
 	let searchQuery;
+	let selectedEBtn = false;
+	let selectedABtn = false;
+	let selectedLBtn = false;
 
 	afterUpdate(() => {
 		changeMonth()
@@ -18,6 +21,16 @@
 			findAuthors()
 		}
 	})
+
+	function updateEBtnValue() {
+		selectedEBtn = true;
+	}
+	function updateLBtnValue() {
+		selectedLBtn = true;
+	}
+	function updateABtnValue() {
+		selectedABtn = true;
+	}
 
 	function changeMonth() {
 		console.log(chosenBook);
@@ -57,7 +70,7 @@
 
 		function searchAmazon(bookTitle) {
 			searchQuery = bookTitle.split(' ').join('+')
-			// url = `https://www.amazon.com/s?k=${searchQuery}&i=stripbooks&ref=nb_sb_noss_2`
+			url = `https://www.amazon.com/s?k=${searchQuery}&i=stripbooks&ref=nb_sb_noss_2`
 		}
 
 
@@ -127,6 +140,10 @@
 		margin-left: 100px;
 		font-size: 22px;
 	}
+	.clicked {
+		background-color: rgba(230,214,197,0.95);
+		color: black;
+	}
 
 </style>
 
@@ -147,9 +164,23 @@
 			</div>
 
 			<div class='book-buttons'>
-				<button on:click={() => updateFutureLibrary(chosenBook)}>Add to Want to Read Shelf</button>
-				<button on:hovering={() => searchAmazon(chosenBook.title)}>Search on Amazon</button>
-				<button>Connect to E-Reader</button>
+				{#if selectedLBtn === false}
+				<button on:click={() => updateFutureLibrary(chosenBook)} on:click={updateLBtnValue}>Add to Want to Read Shelf</button>
+				{:else}
+				<button class='clicked' on:click={() => updateFutureLibrary(chosenBook)}>Added!</button>
+				{/if}
+				{#if selectedABtn === false}
+				<a href='{url}'><button on:click={() => searchAmazon(chosenBook.title)} on:click={updateABtnValue}>Search on Amazon</button></a>
+				{:else}
+				<button class='clicked'}>Click to Search!</button>
+				{/if}
+				{#if selectedEBtn === false}
+				<button on:click={updateEBtnValue}>Connect to E-Reader</button>
+				{:else}
+				<button class='clicked' >Click to Connect</button>
+				{/if}
+
+
 			</div>
 		</div>
 		<div class='book-description'>

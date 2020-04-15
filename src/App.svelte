@@ -68,7 +68,6 @@
   // adds want to read book to already read book
   // takes in chosenBook.attributes
   function updatePastLibrary(bookInfo) {
-    console.log(bookInfo);
     let usersAddedBook = bookInfo
     let header = {
       method: 'PATCH'
@@ -83,12 +82,13 @@
   // moves book from search results to Want to Read LibraryPast
   // takes in chosenBook.attributes
   function updateFutureLibrary(bookInfo) {
-    let usersAddedBook = bookInfo
     let header = {
       method: 'POST'
     }
-    fetch(`http://book-basket-be.herokuapp.com/create_book?author=${usersAddedBook.authors}&genre=${usersAddedBook.genres}&title=${usersAddedBook.title}&isbn=${usersAddedBook.isbn}&date_published=${usersAddedBook.date_published}&summary=${usersAddedBook.summary}&image_url=${usersAddedBook.image_url}`, header)
-      .then(response => console.log(response));
+      let usersAddedBook = bookInfo
+      fetch(`http://book-basket-be.herokuapp.com/create_book?author=${usersAddedBook.authors.data[0].attributes.name}&genre=${usersAddedBook.genres.data[0].attributes.type}&title=${usersAddedBook.title}&isbn=${usersAddedBook.isbn}&date_published=${usersAddedBook.published_date}&summary=${usersAddedBook.summary}&image_url=${usersAddedBook.image_url}`, header)
+        .then(response => console.log(response))
+        .catch(error => console.log(error))
   }
 
 
