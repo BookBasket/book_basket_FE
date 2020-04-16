@@ -30,7 +30,7 @@
       let textWarning = document.getElementById('warning')
       textWarning.classList.remove('hidden')
     } else {
-      fetch(`https://book-basket-be-staging.herokuapp.com/search?type=${radioInput}&q=${userInput}`)
+      fetch(`http://book-basket-be.herokuapp.com/search?type=${radioInput}&q=${userInput}`)
         .then(response => response.json())
         .then(response => exportBooks(response))
         .catch(error => console.log(error))
@@ -65,7 +65,7 @@
     let header = {
       method: 'PATCH'
     }
-    fetch(`https://book-basket-be.herokuapp.com/switch_shelves?isbn=${usersAddedBook.isbn}`, header)
+    fetch(`http://book-basket-be.herokuapp.com/switch_shelves?isbn=${usersAddedBook.isbn}`, header)
         .then(response => console.log(response))
         .catch(error => console.log(error))
   }
