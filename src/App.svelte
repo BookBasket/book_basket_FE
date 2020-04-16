@@ -65,7 +65,9 @@
     let header = {
       method: 'PATCH'
     }
-    fetch(`https://book-basket-be.herokuapp.com/switch_shelves?isbn=${usersAddedBook.isbn}`, header)
+    var uri = `http://book-basket-be.herokuapp.com/switch_shelves?isbn=${usersAddedBook.isbn}`;
+    var webSafe = encodeURI(uri);
+    fetch(`${webSafe}`, header)
         .then(response => console.log(response))
         .catch(error => console.log(error))
   }
@@ -77,7 +79,9 @@
       method: 'POST'
     }
       let usersAddedBook = bookInfo
-      fetch(`http://book-basket-be.herokuapp.com/create_book?author=${usersAddedBook.authors.data[0].attributes.name}&genre=${usersAddedBook.genres.data[0].attributes.type}&title=${usersAddedBook.title}&isbn=${usersAddedBook.isbn}&date_published=${usersAddedBook.published_date}&summary=${usersAddedBook.summary}&image_url=${usersAddedBook.image_url}`, header)
+      var uri = `http://book-basket-be.herokuapp.com/create_book?author=${usersAddedBook.authors.data[0].attributes.name}&genre=${usersAddedBook.genres.data[0].attributes.type}&title=${usersAddedBook.title}&isbn=${usersAddedBook.isbn}&date_published=${usersAddedBook.published_date}&summary=${usersAddedBook.description}&image_url=${usersAddedBook.image_url}`;
+      var webSafe = encodeURI(uri);
+      fetch(`${webSafe}`, header)
         .then(response => console.log(response))
         .catch(error => console.log(error))
   }

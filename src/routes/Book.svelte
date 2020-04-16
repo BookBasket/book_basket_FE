@@ -8,7 +8,7 @@
 	let authorNames = '';
 	let month = '';
 	let formatDate = [];
-	let url = 'https://amazon.com';
+	let url = 'http://amazon.com';
 	let searchQuery;
 	let selectedEBtn = false;
 	let selectedABtn = false;
@@ -70,7 +70,7 @@
 
 		function searchAmazon(bookTitle) {
 			searchQuery = bookTitle.split(' ').join('+')
-			url = `https://www.amazon.com/s?k=${searchQuery}&i=stripbooks&ref=nb_sb_noss_2`
+			url = `http://www.amazon.com/s?k=${searchQuery}&i=stripbooks&ref=nb_sb_noss_2`
 		}
 
 
