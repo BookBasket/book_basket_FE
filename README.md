@@ -16,6 +16,12 @@ This was our first Cross-Pollinatin Project where members of a front end student
 - From the Users page, one can choose to see either library stored on the app, or begin a search from there. 
 - The two libraries are your Want to Read Library, and your Already Read Library. These libraries update automatically with the backend database depending on the users in teractions on the app.
 
+### Project Technologies Used
+- Svelte for Frontend Framework. First encounter with Svelte.
+- Cypress for Testign Framework Svelte is so new, it did not have a set testing library yet, or much documentation paired with it, so Frontend went with an outside testing suite.
+- Svelte - Routing for linking pages together, similar to React Routing.
+- Python for Backend Framework with GRaphQL 
+
 ### Project Learning Goals
 - Ultimately, demonstrate knowledge you’ve gained throughout Turing
 - Use an agile process to turn well defined requirements into deployed and production ready software
