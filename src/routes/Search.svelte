@@ -70,6 +70,8 @@
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
+    flex-direction: row;
+    align-items: flex-start;
     padding: 20px;
   }
   .each-book {
@@ -94,13 +96,11 @@
   .plus-icon {
     position: absolute;
     height: 30px;
-    margin-top: 15px;
     margin-left: 40px;
     visibility: hidden;
   }
   .each-book:hover .plus-icon {
     visibility: visible;
-    display: absolute;
   }
   .hidden {
     display: none;
