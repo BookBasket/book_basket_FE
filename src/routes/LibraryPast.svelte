@@ -16,7 +16,7 @@
 		 body: JSON.stringify({
  		 "query": `{ shelf(id: "U2hlbGZPYmplY3Q6MQ==") { id type books { edges { node { id title summary publishedDate imageUrl isbn authors { edges { node { id name } } } genres { edges { node { id type } } } } } } } }`
  	 })}
-	 fetch(`https://book-basket-be.herokuapp.com/graphql`, header)
+	 fetch(`http://book-basket-be.herokuapp.com/graphql`, header)
 		 .then(response => response.json())
 		.then(response => usersReadBooks = response.data.shelf.books.edges)
 		.catch(error => console.log(error))
