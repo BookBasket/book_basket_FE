@@ -5,7 +5,7 @@ A Svelte Built App for finding, storing, and accessing all your favorite books.
 This was our first Cross-Pollinatin Project where members of a front end student team were paired up with members of a back end student team to create a web database of information, displayed beautifully for user experience, and have run on a web safe production source, Heroku. This was the final project from Mod 4 at Turing School of Software and Design. We were given just short of two weeks to create a database of books from Google Books API, mutate the information recieved and send over to the Front end team which would display the information on a newly learned language, Svelte. A major learning goal for this project was to gain experience dividing applications into components and domains of responsibilities to facilitate multi-developer teams using Agile sprints, effective Git workflow, and continuous integration testing suites.
 
 ### Screenshots of Wire Frame
-![Login Page]("https://user-images.githubusercontent.com/53594458/79713068-e1e17100-8289-11ea-8779-6797ef20a199.png)
+![Login Page](https://user-images.githubusercontent.com/53594458/79713068-e1e17100-8289-11ea-8779-6797ef20a199.png)
 ![Search Results Page](https://user-images.githubusercontent.com/53594458/79713122-076e7a80-828a-11ea-9468-c31b08ed00f8.png)
 
 ### Screenshots of Final Application
